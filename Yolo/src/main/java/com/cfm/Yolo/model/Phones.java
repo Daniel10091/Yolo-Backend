@@ -1,6 +1,7 @@
 package com.cfm.Yolo.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -11,10 +12,10 @@ import java.time.Instant;
 @Setter
 @ToString
 @Entity
-@Table(name = "emails")
-public class Email {
+@Table(name = "phones")
+public class Phones {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -22,10 +23,14 @@ public class Email {
     @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "ddd", length = 10)
+    private String ddd;
+
+    @Column(name = "phone_number", length = 20)
+    private String phoneNumber;
 
     @Column(name = "created_date", nullable = false)
+    @CreationTimestamp
     private Instant createdDate;
 
 }

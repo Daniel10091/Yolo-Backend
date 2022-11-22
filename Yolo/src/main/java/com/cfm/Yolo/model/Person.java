@@ -1,6 +1,7 @@
 package com.cfm.Yolo.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -16,37 +17,39 @@ import java.util.Set;
 @Table(name = "person")
 public class Person {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "gender", nullable = false, length = 20)
+    @Column(name = "gender", length = 20)
     private String gender;
 
-    @Column(name = "avatar", nullable = false)
+    @Column(name = "avatar")
     private byte[] avatar;
 
-    @Column(name = "background", nullable = false)
+    @Column(name = "background")
     private byte[] background;
 
     @Column(name = "created_date", nullable = false)
+    @CreationTimestamp
     private Instant createdDate;
 
     @OneToMany(mappedBy = "person")
-    private Set<Contact> contacts = new LinkedHashSet<>();
+    private Set<Friend> friends = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "person")
     private Set<Address> addresses = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "person")
-    private Set<Phone> phones = new LinkedHashSet<>();
+    private Set<Phones> phones = new LinkedHashSet<>();
 
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "person_id")
-    private User user;
+//    @OneToOne(mappedBy = "person")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private Users user;
 
     @OneToMany(mappedBy = "person")
     private Set<Email> emails = new LinkedHashSet<>();

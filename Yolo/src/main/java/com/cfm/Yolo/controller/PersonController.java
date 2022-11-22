@@ -3,7 +3,6 @@ package com.cfm.Yolo.controller;
 import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.repository.PersonRepository;
 import com.cfm.Yolo.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,30 +10,34 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
 public class PersonController {
 
-    @Autowired
 //    PersonRepository personRepository;
+    @Autowired
     PersonServices personServices;
 
-    public PersonController(PersonServices personServices) {
-        this.personServices = personServices;
-    }
-
-    @GetMapping("listAll")
-    public ResponseEntity<List<PersonDto>> listAllPeople() {
+//    @GetMapping("/listAll")
+//    public ResponseEntity<List<PersonDto>> listAllPeople() {
 //        return ResponseEntity.ok(personRepository.findAll().stream().map(PersonDto::new).collect(Collectors.toList()));
-        List<Person> person = personServices.findAll();
-        return ResponseEntity.ok(PersonConvert.converPersonDtoList(person));
+//    }
+
+//    @GetMapping("/find/{id}")
+//    public ResponseEntity<PersonDto> findPersonById(@PathVariable Integer id) {
+//        return ResponseEntity.ok(personRepository.findPersonById(id).stream().map(PersonDto::new).collect(Collectors.toList()));
+//    }
+
+    @GetMapping("/listAll")
+    public ResponseEntity<List<PersonDto>> listAllPeople() {
+        List<Person> person = personServices.listAllPeople();
+        return ResponseEntity.ok(PersonConvert.convertPersonDtoList(person));
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<PersonDto> findPersonByCode(@PathVariable("id") Integer id) {
-        Person person = personServices.findPersonByCode(id);
+    public ResponseEntity<PersonDto> findPersonById(@PathVariable("id") Integer id) {
+        Person person = personServices.findPersonById(id);
         return ResponseEntity.ok(PersonConvert.convertPersonDto(person));
     }
 

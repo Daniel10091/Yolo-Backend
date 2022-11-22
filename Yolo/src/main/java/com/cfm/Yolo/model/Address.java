@@ -14,6 +14,7 @@ import java.time.Instant;
 @Table(name = "addresses")
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -24,7 +25,7 @@ public class Address {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @Column(name = "district", nullable = false, length = 50)
+    @Column(name = "district", length = 50)
     private String district;
 
     @Column(name = "state", nullable = false, length = 50)
