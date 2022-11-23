@@ -1,6 +1,7 @@
 package com.cfm.Yolo.dto;
 
 import com.cfm.Yolo.model.Person;
+import com.cfm.Yolo.model.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,11 +34,26 @@ public class PersonDto implements Serializable {
         this.avatar = person.getAvatar();
         this.background = person.getBackground();
         this.createdDate = person.getCreatedDate();
-        if (person.getUser() != null) {
-            this.username = person.getUser().getUsername();
-            this.salt = person.getUser().getSalt();
-            this.hash = person.getUser().getHash();
-            this.userCreatedDate = person.getUser().getCreatedDate();
-        }
+        this.username = person.getUser().getUsername();
+        this.salt = person.getUser().getSalt();
+        this.hash = person.getUser().getHash();
+        this.userCreatedDate = person.getUser().getCreatedDate();
+//        if (person.getUser() != null) {
+//        }
+    }
+
+    public Person toModel() {
+        var person =  new Person();
+        person.setId(this.getCode());
+        person.setName(this.getName());
+        person.setGender(this.getGender());
+        person.setAvatar(this.getAvatar());
+        person.setBackground(this.getBackground());
+        person.setUser(new Users());
+        person.getUser().setPerson(person);
+        person.getUser().setUsername(this.getUsername());
+        person.getUser().setSalt(this.getSalt());
+        person.getUser().setHash(this.getHash());
+        return person;
     }
 }

@@ -1,6 +1,7 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,14 +9,13 @@ import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "person")
+@SecondaryTable(name = "users", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -46,9 +46,7 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private Set<Phones> phones = new LinkedHashSet<>();
 
-//    @OneToOne(mappedBy = "person")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
     private Users user;
 
     @OneToMany(mappedBy = "person")

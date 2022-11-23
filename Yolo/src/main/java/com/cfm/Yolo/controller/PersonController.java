@@ -3,9 +3,8 @@ package com.cfm.Yolo.controller;
 import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.services.PersonServices;
+import com.cfm.Yolo.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class PersonController {
 
 //    PersonRepository personRepository;
     @Autowired
-    PersonServices personServices;
+PersonService personService;
 
 //    @GetMapping("/listAll")
 //    public ResponseEntity<List<PersonDto>> listAllPeople() {
@@ -31,22 +30,49 @@ public class PersonController {
 
     @GetMapping("/listAll")
     public ResponseEntity<List<PersonDto>> listAllPeople() {
-        List<Person> person = personServices.listAllPeople();
+        List<Person> person = personService.listAllPeople();
         return ResponseEntity.ok(PersonConvert.convertPersonDtoList(person));
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<PersonDto> findPersonById(@PathVariable("id") Integer id) {
-        Person person = personServices.findPersonById(id);
+        Person person = personService.findPersonById(id);
         return ResponseEntity.ok(PersonConvert.convertPersonDto(person));
     }
 
+//    @PutMapping("/edit")
+//    public ResponseEntity<PersonDto> editAccount(@RequestBody PersonDto personDto) {
+//        var dto = new PersonDto();
+//        dto.setCode(personDto.getCode());
+//        dto.setName(personDto.getName());
+//        dto.setGender(personDto.getGender());
+//        dto.setAvatar(personDto.getAvatar());
+//        dto.setBackground(personDto.getBackground());
+//        dto.setUsername(personDto.getUsername());
+//        dto.setSalt(personDto.getSalt());
+//        dto.setHash(personDto.getHash());
+//        return ResponseEntity.ok(personService.saveAccount(dto));
+//    }
+
     @PostMapping("/save")
-    public ResponseEntity<PersonDto> savePerson(@RequestBody PersonDto personDto) {
-        var retorno =  personServices.savePerson(personDto);
-        return new ResponseEntity<>(retorno, (retorno != null) ?
-                (personDto.getCode() != null) ? HttpStatus.OK : HttpStatus.CREATED :
-                HttpStatus.BAD_REQUEST);
+    public ResponseEntity<PersonDto> saveAccount(@RequestBody PersonDto personDto) {
+        var dto = new PersonDto();
+        dto.setName(personDto.getName());
+        dto.setGender(personDto.getGender());
+        dto.setAvatar(personDto.getAvatar());
+        dto.setBackground(personDto.getBackground());
+        dto.setUsername(personDto.getUsername());
+        dto.setSalt(personDto.getSalt());
+        dto.setHash(personDto.getHash());
+        return ResponseEntity.ok(personService.saveAccount(PersonConvert.convertPerson(dto)));
     }
+
+//    @PostMapping("/save")
+//    public ResponseEntity<PersonDto> saveAccount(@RequestBody PersonDto personDto) {
+//        var retorno =  personServices.saveAccount(personDto);
+//        return new ResponseEntity<>(retorno, (retorno != null) ?
+//                (personDto.getCode() != null) ? HttpStatus.OK : HttpStatus.CREATED :
+//                HttpStatus.BAD_REQUEST);
+//    }
 
 }

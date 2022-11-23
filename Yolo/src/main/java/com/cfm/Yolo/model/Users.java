@@ -1,27 +1,26 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "users")
 public class Users {
+
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id")
+    @MapsId
     private Person person;
 
     @Column(name = "username", nullable = false, length = 100)
@@ -34,7 +33,6 @@ public class Users {
     private String hash;
 
     @Column(name = "created_date")
-    @CreationTimestamp
     private Instant createdDate;
 
     @OneToMany(mappedBy = "user")
