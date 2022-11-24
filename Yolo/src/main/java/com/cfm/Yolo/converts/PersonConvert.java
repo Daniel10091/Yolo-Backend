@@ -15,6 +15,11 @@ public class PersonConvert {
         personDto.setGender(person.getGender());
         personDto.setAvatar(person.getAvatar());
         personDto.setBackground(person.getBackground());
+        personDto.setCreatedDate(person.getCreatedDate());
+        personDto.setUsername(person.getUser().getUsername());
+        personDto.setSalt(person.getUser().getSalt());
+        personDto.setHash(person.getUser().getHash());
+        personDto.setUserCreatedDate(person.getUser().getCreatedDate());
         return personDto;
     }
 
@@ -22,13 +27,18 @@ public class PersonConvert {
         return person.stream().map(PersonConvert::convertPersonDto).collect(Collectors.toList());
     }
 
-    public static Person convertPerson (PersonDto personDto) {
+    public static Person convertPerson(PersonDto personDto) {
         Person person = new Person();
         person.setId(personDto.getCode());
         person.setName(personDto.getName());
         person.setGender(personDto.getGender());
         person.setAvatar(personDto.getAvatar());
         person.setBackground(personDto.getBackground());
+        person.setCreatedDate(personDto.getCreatedDate());
+        person.getUser().setUsername(personDto.getUsername());
+        person.getUser().setSalt(personDto.getSalt());
+        person.getUser().setHash(personDto.getHash());
+        person.getUser().setCreatedDate(personDto.getUserCreatedDate());
         return person;
     }
 

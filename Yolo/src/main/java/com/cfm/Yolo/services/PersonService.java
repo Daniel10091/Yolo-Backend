@@ -54,29 +54,29 @@ public class PersonService {
 //        return new PersonDto(saveReturn);
 //    }
 
-    public Person saveAccount(Person entity) {
+    public Person saveAccount(PersonDto personDto) {
         Person saveReturn = null;
         Person person = null;
-        var dto = PersonConvert.convertPersonDto(entity);
+//        var entity = PersonConvert.convertPerson(personDto);
 
-        if (dto.getCode() != null) {
-            person = personRepository.findById(dto.getCode()).get();
+        if (personDto.getCode() != null) {
+            person = personRepository.findById(personDto.getCode()).get();
             if (person !=  null) {
-                person.setName(dto.getName());
-                person.setGender(dto.getGender());
-                person.setAvatar(dto.getAvatar());
-                person.setBackground(dto.getBackground());
-                person.getUser().setUsername(dto.getUsername());
-                person.getUser().setSalt(dto.getSalt());
-                person.getUser().setHash(dto.getHash());
+                person.setName(personDto.getName());
+                person.setGender(personDto.getGender());
+                person.setAvatar(personDto.getAvatar());
+                person.setBackground(personDto.getBackground());
+                person.getUser().setUsername(personDto.getUsername());
+                person.getUser().setSalt(personDto.getSalt());
+                person.getUser().setHash(personDto.getHash());
             } else {
                 return null;
             }
         } else {
-            person = dto.toModel();
+            person = personDto.toModel();
         }
         saveReturn = personRepository.save(person);
-//        return saveReturn != null ? PersonConvert.convertPersonDto(saveReturn) : null;
-        return new Person(PersonConvert.convertPerson(saveReturn));
+        return saveReturn != null ? saveReturn : null;
+//        return new Person(PersonConvert.convertPersonDto(saveReturn));
     }
 }

@@ -51,12 +51,20 @@ PersonService personService;
 //        dto.setUsername(personDto.getUsername());
 //        dto.setSalt(personDto.getSalt());
 //        dto.setHash(personDto.getHash());
-//        return ResponseEntity.ok(personService.saveAccount(dto));
+//        dto.setCreatedDate(personDto.getCreatedDate());
+//        dto.setUserCreatedDate(personDto.getUserCreatedDate());
+//        var newPerson = personService.saveAccount(dto);
+//        return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
 //    }
 
     @PostMapping("/save")
     public ResponseEntity<PersonDto> saveAccount(@RequestBody PersonDto personDto) {
         var dto = new PersonDto();
+
+        if (personDto.getCode() != null) {
+            dto.setCode(personDto.getCode());
+        }
+
         dto.setName(personDto.getName());
         dto.setGender(personDto.getGender());
         dto.setAvatar(personDto.getAvatar());
@@ -64,7 +72,10 @@ PersonService personService;
         dto.setUsername(personDto.getUsername());
         dto.setSalt(personDto.getSalt());
         dto.setHash(personDto.getHash());
-        return ResponseEntity.ok(personService.saveAccount(PersonConvert.convertPerson(dto)));
+        dto.setCreatedDate(personDto.getCreatedDate());
+        dto.setUserCreatedDate(personDto.getUserCreatedDate());
+        var newPerson = personService.saveAccount(dto);
+        return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
     }
 
 //    @PostMapping("/save")

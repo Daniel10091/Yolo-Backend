@@ -2,6 +2,7 @@ package com.cfm.Yolo.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -33,6 +34,7 @@ public class Users {
     private String hash;
 
     @Column(name = "created_date")
+    @CreationTimestamp
     private Instant createdDate;
 
     @OneToMany(mappedBy = "user")
