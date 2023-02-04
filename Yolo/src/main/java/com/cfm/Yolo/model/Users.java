@@ -58,4 +58,25 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private Set<Post> posts = new LinkedHashSet<>();
 
+    public void setPassword(String password) {
+    }
+
+    public void setBackground(byte[] background) {
+    }
+
+    public void setAvatar(byte[] avatar) {
+    }
+
+    public String getPassword() {
+      return null;
+    }
+
+    public byte[] getBackground() {
+      return null;
+    }
+
+    public byte[] getAvatar() {
+      return null;
+    }
+
 }

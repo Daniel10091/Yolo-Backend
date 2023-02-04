@@ -8,6 +8,12 @@ import com.cfm.Yolo.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -20,10 +26,17 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    /**
+     * @return
+     */
     public List<Person> listAllPeople() {
         return personRepository.findAll();
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Person findPersonById(Integer id) {
         return personRepository.findPersonById(id)
                 .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
@@ -54,21 +67,31 @@ public class PersonService {
 //        return new PersonDto(saveReturn);
 //    }
 
+    /**
+     * @param personDto
+     * @return
+     */
     public Person saveAccount(PersonDto personDto) {
         Person saveReturn = null;
         Person person = null;
-//        var entity = PersonConvert.convertPerson(personDto);
+        //var entity = PersonConvert.convertPerson(personDto);
+
+        byte[] salt = generateSalt();
+
+        personDto.setPassword(encryptPassword(personDto.getPassword(), salt));
+        personDto.setSalt(Base64.getEncoder().encodeToString(salt));
 
         if (personDto.getCode() != null) {
             person = personRepository.findById(personDto.getCode()).get();
             if (person !=  null) {
                 person.setName(personDto.getName());
                 person.setGender(personDto.getGender());
-                person.setAvatar(personDto.getAvatar());
-                person.setBackground(personDto.getBackground());
+                person.getUser().setAvatar(personDto.getAvatar());
+                person.getUser().setBackground(personDto.getBackground());
                 person.getUser().setUsername(personDto.getUsername());
-                person.getUser().setSalt(personDto.getSalt());
-                person.getUser().setHash(personDto.getHash());
+                // person.getUser().setSalt(personDto.getSalt());
+                person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+                person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
             } else {
                 return null;
             }
@@ -77,6 +100,48 @@ public class PersonService {
         }
         saveReturn = personRepository.save(person);
         return saveReturn != null ? saveReturn : null;
-//        return new Person(PersonConvert.convertPersonDto(saveReturn));
+        //return new Person(PersonConvert.convertPersonDto(saveReturn));
     }
+
+    // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a senha antes da criptografia. 
+    // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão hashes diferentes armazenados no banco de dados.
+    /**
+     * @return
+     */
+    private byte[] generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        return salt;
+    }
+
+    /**
+     * @param password
+     * @param salt
+     * @return
+     */
+    private String encryptPassword(String password, byte[] salt) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update(salt);
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // TODO: A função `checkPassword` compara a senha fornecida pelo usuário com o hash armazenado no banco de dados usando o salt correspondente.
+    /**
+     * @param password
+     * @param encryptedPassword
+     * @param salt
+     * @return
+     */
+    public boolean checkPassword(String password, String encryptedPassword, String salt) {
+        byte[] saltBytes = Base64.getDecoder().decode(salt);
+        String encryptedPassword2 = encryptPassword(password, saltBytes);
+        return encryptedPassword.equals(encryptedPassword2);
+    }
+
 }

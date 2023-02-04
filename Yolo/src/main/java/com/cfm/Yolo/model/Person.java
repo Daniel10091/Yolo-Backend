@@ -1,7 +1,6 @@
 package com.cfm.Yolo.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +8,8 @@ import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -26,12 +27,6 @@ public class Person {
 
     @Column(name = "gender", length = 20)
     private String gender;
-
-    @Column(name = "avatar")
-    private byte[] avatar;
-
-    @Column(name = "background")
-    private byte[] background;
 
     @Column(name = "created_date", nullable = false)
     @CreationTimestamp

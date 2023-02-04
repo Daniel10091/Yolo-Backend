@@ -21,14 +21,20 @@ public class User {
     @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 
+    @Column(name = "avatar")
+    private byte[] avatar;
+
+    @Column(name = "background")
+    private byte[] background;
+
     @Column(name = "username", nullable = false, length = 100)
     private String username;
 
     @Column(name = "salt", nullable = false)
     private String salt;
 
-    @Column(name = "hash", nullable = false)
-    private String hash;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "created_date", nullable = false)
     private Instant createdDate;

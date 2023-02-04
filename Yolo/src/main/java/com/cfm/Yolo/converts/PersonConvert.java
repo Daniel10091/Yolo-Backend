@@ -13,12 +13,12 @@ public class PersonConvert {
         personDto.setCode(person.getId());
         personDto.setName(person.getName());
         personDto.setGender(person.getGender());
-        personDto.setAvatar(person.getAvatar());
-        personDto.setBackground(person.getBackground());
+        personDto.setAvatar(person.getUser().getAvatar());
+        personDto.setBackground(person.getUser().getBackground());
         personDto.setCreatedDate(person.getCreatedDate());
         personDto.setUsername(person.getUser().getUsername());
         personDto.setSalt(person.getUser().getSalt());
-        personDto.setHash(person.getUser().getHash());
+        personDto.setPassword(person.getUser().getPassword());
         personDto.setUserCreatedDate(person.getUser().getCreatedDate());
         return personDto;
     }
@@ -32,12 +32,12 @@ public class PersonConvert {
         person.setId(personDto.getCode());
         person.setName(personDto.getName());
         person.setGender(personDto.getGender());
-        person.setAvatar(personDto.getAvatar());
-        person.setBackground(personDto.getBackground());
+        person.getUser().setAvatar(personDto.getAvatar());
+        person.getUser().setBackground(personDto.getBackground());
         person.setCreatedDate(personDto.getCreatedDate());
         person.getUser().setUsername(personDto.getUsername());
         person.getUser().setSalt(personDto.getSalt());
-        person.getUser().setHash(personDto.getHash());
+        person.getUser().setPassword(personDto.getPassword());
         person.getUser().setCreatedDate(personDto.getUserCreatedDate());
         return person;
     }

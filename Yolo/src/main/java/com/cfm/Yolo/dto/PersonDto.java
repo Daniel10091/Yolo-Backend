@@ -19,24 +19,24 @@ public class PersonDto implements Serializable {
     private Integer code;
     private String name;
     private String gender;
+    private Instant createdDate;
     private byte[] avatar;
     private byte[] background;
-    private Instant createdDate;
     private String username;
     private String salt;
-    private String hash;
+    private String password;
     private Instant userCreatedDate;
 
     public PersonDto(Person person) {
         this.code = person.getId();
         this.name = person.getName();
         this.gender = person.getGender();
-        this.avatar = person.getAvatar();
-        this.background = person.getBackground();
+        this.avatar = person.getUser().getAvatar();
+        this.background = person.getUser().getBackground();
         this.createdDate = person.getCreatedDate();
         this.username = person.getUser().getUsername();
         this.salt = person.getUser().getSalt();
-        this.hash = person.getUser().getHash();
+        this.password = person.getUser().getHash();
         this.userCreatedDate = person.getUser().getCreatedDate();
 //        if (person.getUser() != null) {
 //        }
@@ -47,13 +47,13 @@ public class PersonDto implements Serializable {
         person.setId(this.getCode());
         person.setName(this.getName());
         person.setGender(this.getGender());
-        person.setAvatar(this.getAvatar());
-        person.setBackground(this.getBackground());
         person.setUser(new Users());
         person.getUser().setPerson(person);
+        person.getUser().setAvatar(this.getAvatar());
+        person.getUser().setBackground(this.getBackground());
         person.getUser().setUsername(this.getUsername());
         person.getUser().setSalt(this.getSalt());
-        person.getUser().setHash(this.getHash());
+        person.getUser().setPassword(this.getPassword());
         return person;
     }
 }

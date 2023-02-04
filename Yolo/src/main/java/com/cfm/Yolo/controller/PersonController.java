@@ -71,7 +71,7 @@ PersonService personService;
         dto.setBackground(personDto.getBackground());
         dto.setUsername(personDto.getUsername());
         dto.setSalt(personDto.getSalt());
-        dto.setHash(personDto.getHash());
+        dto.setPassword(personDto.getPassword());
         dto.setCreatedDate(personDto.getCreatedDate());
         dto.setUserCreatedDate(personDto.getUserCreatedDate());
         var newPerson = personService.saveAccount(dto);

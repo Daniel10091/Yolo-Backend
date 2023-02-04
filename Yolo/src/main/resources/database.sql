@@ -2,8 +2,6 @@ CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     gender VARCHAR(20) DEFAULT "Não definido",
-    avatar LONGBLOB,
-    background LONGBLOB,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_person PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -43,6 +41,8 @@ CREATE TABLE addresses (
 
 CREATE TABLE users (
     id INT NOT NULL,
+    avatar LONGBLOB,
+    background LONGBLOB,
     username VARCHAR(100) NOT NULL,
     salt VARCHAR(255) NOT NULL,
     hash VARCHAR(255) NOT NULL,
