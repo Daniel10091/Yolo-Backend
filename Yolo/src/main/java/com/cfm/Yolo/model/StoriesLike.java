@@ -20,7 +20,7 @@ public class StoriesLike {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @Column(name = "liked", nullable = false)
     private Boolean liked = false;

@@ -11,10 +11,9 @@ import java.time.Instant;
 @Setter
 @ToString
 @Entity
-@Table(name = "friends")
-public class Friend {
+@Table(name = "user")
+public class _User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -22,14 +21,22 @@ public class Friend {
     @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "friend_id", nullable = false)
-    private User friend;
+    @Column(name = "avatar")
+    private byte[] avatar;
 
-    @Column(name = "approved")
-    private Boolean approved;
+    @Column(name = "background")
+    private byte[] background;
+
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
+
+    @Column(name = "salt", nullable = false)
+    private String salt;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @Column(name = "created_date", nullable = false)
-    private Instant created_date;
+    private Instant createdDate;
 
 }

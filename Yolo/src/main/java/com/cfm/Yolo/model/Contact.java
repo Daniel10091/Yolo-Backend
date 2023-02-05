@@ -23,7 +23,7 @@ public class Contact {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "contact_id", nullable = false)
-    private User contact;
+    private _User contact;
 
     @Column(name = "approved")
     private Boolean approved;

@@ -39,7 +39,7 @@ CREATE TABLE addresses (
     CONSTRAINT fk_address_person FOREIGN KEY (person_id) REFERENCES person(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE users (
+CREATE TABLE user (
     id INT NOT NULL,
     avatar LONGBLOB,
     background LONGBLOB,
@@ -59,7 +59,7 @@ CREATE TABLE friends (
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_friend PRIMARY KEY (id),
     CONSTRAINT fk_friend_person FOREIGN KEY (person_id) REFERENCES person(id),
-    CONSTRAINT fk_friend_user FOREIGN KEY (friend_id) REFERENCES users(id)
+    CONSTRAINT fk_friend_user FOREIGN KEY (friend_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE posts (
@@ -70,7 +70,7 @@ CREATE TABLE posts (
     description VARCHAR(255),
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_post PRIMARY KEY (id),
-    CONSTRAINT fk_post_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_post_user FOREIGN KEY (user_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE post_likes (
@@ -80,7 +80,7 @@ CREATE TABLE post_likes (
     liked BOOLEAN NOT NULL DEFAULT FALSE,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_post_likes PRIMARY KEY (id),
-    CONSTRAINT fk_post_likes_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_post_likes_user FOREIGN KEY (user_id) REFERENCES user(id),
     CONSTRAINT fk_post_likes_post FOREIGN KEY (post_id) REFERENCES posts(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -91,7 +91,7 @@ CREATE TABLE messages (
     message VARCHAR(255),
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_message PRIMARY KEY (id),
-    CONSTRAINT fk_message_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_message_user FOREIGN KEY (user_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE message_likes (
@@ -101,7 +101,7 @@ CREATE TABLE message_likes (
     liked BOOLEAN NOT NULL DEFAULT FALSE,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_message_likes PRIMARY KEY (id),
-    CONSTRAINT fk_message_likes_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_message_likes_user FOREIGN KEY (user_id) REFERENCES user(id),
     CONSTRAINT fk_message_likes_message FOREIGN KEY (message_id) REFERENCES messages(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -113,7 +113,7 @@ CREATE TABLE stories (
     description VARCHAR(255),
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_stories PRIMARY KEY (id),
-    CONSTRAINT fk_stories_user FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_stories_user FOREIGN KEY (user_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE stories_likes (
@@ -123,6 +123,6 @@ CREATE TABLE stories_likes (
     liked BOOLEAN NOT NULL DEFAULT FALSE,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_stories_likes PRIMARY KEY (id),
-    CONSTRAINT fk_stories_likes_user FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_stories_likes_user FOREIGN KEY (user_id) REFERENCES user(id),
     CONSTRAINT fk_stories_likes_stories FOREIGN KEY (stories_id) REFERENCES stories(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

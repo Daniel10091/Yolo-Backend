@@ -20,7 +20,7 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users user;
+    private User user;
 
     @Column(name = "content", nullable = false)
     private byte[] content;

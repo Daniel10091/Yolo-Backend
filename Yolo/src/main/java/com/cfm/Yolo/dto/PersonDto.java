@@ -1,7 +1,7 @@
 package com.cfm.Yolo.dto;
 
 import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.model.Users;
+import com.cfm.Yolo.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,7 +36,7 @@ public class PersonDto implements Serializable {
         this.createdDate = person.getCreatedDate();
         this.username = person.getUser().getUsername();
         this.salt = person.getUser().getSalt();
-        this.password = person.getUser().getHash();
+        this.password = person.getUser().getPassword();
         this.userCreatedDate = person.getUser().getCreatedDate();
 //        if (person.getUser() != null) {
 //        }
@@ -47,7 +47,7 @@ public class PersonDto implements Serializable {
         person.setId(this.getCode());
         person.setName(this.getName());
         person.setGender(this.getGender());
-        person.setUser(new Users());
+        person.setUser(new User());
         person.getUser().setPerson(person);
         person.getUser().setAvatar(this.getAvatar());
         person.getUser().setBackground(this.getBackground());

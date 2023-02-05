@@ -1,10 +1,10 @@
 package com.cfm.Yolo.services;
 
-import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.exception.PersonNotFoundException;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.repository.PersonRepository;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -39,33 +39,8 @@ public class PersonService {
      */
     public Person findPersonById(Integer id) {
         return personRepository.findPersonById(id)
-                .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
+            .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
     }
-
-//    public PersonDto saveAccount(PersonDto personDto) {
-//        Person saveReturn = null;
-//        Person person = null;
-//
-//        if (personDto.getCode() != null) {
-//            person = personRepository.findById(personDto.getCode()).get();
-//            if (person !=  null) {
-//                person.setName(personDto.getName());
-//                person.setGender(personDto.getGender());
-//                person.setAvatar(personDto.getAvatar());
-//                person.setBackground(personDto.getBackground());
-//                person.getUser().setUsername(personDto.getUsername());
-//                person.getUser().setSalt(personDto.getSalt());
-//                person.getUser().setHash(personDto.getHash());
-//            } else {
-//                return null;
-//            }
-//        } else {
-//            person = personDto.toModel();
-//        }
-//        saveReturn = personRepository.save(person);
-////        return saveReturn != null ? PersonConvert.convertPersonDto(saveReturn) : null;
-//        return new PersonDto(saveReturn);
-//    }
 
     /**
      * @param personDto
@@ -129,19 +104,6 @@ public class PersonService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    // TODO: A função `checkPassword` compara a senha fornecida pelo usuário com o hash armazenado no banco de dados usando o salt correspondente.
-    /**
-     * @param password
-     * @param encryptedPassword
-     * @param salt
-     * @return
-     */
-    public boolean checkPassword(String password, String encryptedPassword, String salt) {
-        byte[] saltBytes = Base64.getDecoder().decode(salt);
-        String encryptedPassword2 = encryptPassword(password, saltBytes);
-        return encryptedPassword.equals(encryptedPassword2);
     }
 
 }

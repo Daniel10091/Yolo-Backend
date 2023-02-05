@@ -1,24 +1,27 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "person_id", nullable = false)
+    @OneToOne(optional = true)
+    @JoinColumn(name = "id")
+    @MapsId
     private Person person;
 
     @Column(name = "avatar")
@@ -36,7 +39,29 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date")
+    @CreationTimestamp
     private Instant createdDate;
+
+    @OneToMany(mappedBy = "user")
+    private Set<PostLike> postLikes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "friend")
+    private Set<Friend> friends = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Message> messages = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<StoriesLike> storiesLikes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Story> stories = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<MessageLike> messageLikes = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Post> posts = new LinkedHashSet<>();
 
 }

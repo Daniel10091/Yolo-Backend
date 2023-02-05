@@ -4,7 +4,7 @@ import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.exception.PersonNotFoundException;
 import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.model.Users;
+import com.cfm.Yolo.model.User;
 import com.cfm.Yolo.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
@@ -38,22 +38,22 @@ public class PersonServices {
                 person = personE.get();
                 person.setName(personDto.getName());
                 person.setGender(personDto.getGender());
-                person.setAvatar(personDto.getAvatar());
-                person.setBackground(personDto.getBackground());
+                person.getUser().setAvatar(personDto.getAvatar());
+                person.getUser().setBackground(personDto.getBackground());
                 if (person.getUser() != null) {
                     person.getUser().setUsername(personDto.getUsername());
                     person.getUser().setSalt(personDto.getSalt());
-                    person.getUser().setHash(personDto.getHash());
+                    person.getUser().setPassword(personDto.getPassword());
                 }
             } else {
                 return null;
             }
         } else {
             person = PersonConvert.convertPerson(personDto);
-            person.setUser(new Users());
+            person.setUser(new User());
             person.getUser().setUsername(personDto.getUsername());
             person.getUser().setSalt(personDto.getSalt());
-            person.getUser().setHash(personDto.getHash());
+            person.getUser().setPassword(personDto.getPassword());
         }
 
 //        var lista = new ArrayList<>({person,person.getUsers()});

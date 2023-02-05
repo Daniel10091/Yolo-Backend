@@ -4,29 +4,20 @@ import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.services.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api")
 public class PersonController {
 
-//    PersonRepository personRepository;
-    @Autowired
-PersonService personService;
+    private final PersonService personService;
 
-//    @GetMapping("/listAll")
-//    public ResponseEntity<List<PersonDto>> listAllPeople() {
-//        return ResponseEntity.ok(personRepository.findAll().stream().map(PersonDto::new).collect(Collectors.toList()));
-//    }
-
-//    @GetMapping("/find/{id}")
-//    public ResponseEntity<PersonDto> findPersonById(@PathVariable Integer id) {
-//        return ResponseEntity.ok(personRepository.findPersonById(id).stream().map(PersonDto::new).collect(Collectors.toList()));
-//    }
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping("/listAll")
     public ResponseEntity<List<PersonDto>> listAllPeople() {

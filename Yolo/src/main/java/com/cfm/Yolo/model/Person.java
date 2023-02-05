@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "person")
-@SecondaryTable(name = "users", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
+@SecondaryTable(name = "user", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Person {
 
     @Id
@@ -42,7 +42,7 @@ public class Person {
     private Set<Phones> phones = new LinkedHashSet<>();
 
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
-    private Users user;
+    private User user;
 
     @OneToMany(mappedBy = "person")
     private Set<Email> emails = new LinkedHashSet<>();
