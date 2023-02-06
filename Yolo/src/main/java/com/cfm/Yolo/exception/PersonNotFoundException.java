@@ -6,4 +6,8 @@ public class PersonNotFoundException extends RuntimeException {
         super(message);
     }
 
+    public PersonNotFoundException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

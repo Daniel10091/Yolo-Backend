@@ -39,7 +39,7 @@ public class PersonService {
      */
     public Person findPersonById(Integer id) {
         return personRepository.findPersonById(id)
-            .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
+                .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
     }
 
     /**
