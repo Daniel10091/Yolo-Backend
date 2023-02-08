@@ -1,6 +1,5 @@
 package com.cfm.Yolo.dto;
 
-import java.io.Serializable;
 
 import lombok.*;
 

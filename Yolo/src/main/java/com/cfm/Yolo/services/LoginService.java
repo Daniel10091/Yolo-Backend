@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.exception.UserNotFoundException;
 import com.cfm.Yolo.model.User;
 import com.cfm.Yolo.repository.UserRepository;
 
@@ -29,8 +28,7 @@ public class LoginService {
      * @return
      */
     public User findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User by name" + username + "was not found"));
+        return userRepository.findUserByUsername(username);
     }
 
     // TODO: A função `login` recebe o nome de usuário correspondente fo banco de

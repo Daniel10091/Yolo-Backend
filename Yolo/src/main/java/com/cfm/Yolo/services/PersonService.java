@@ -1,7 +1,6 @@
 package com.cfm.Yolo.services;
 
 import com.cfm.Yolo.dto.PersonDto;
-import com.cfm.Yolo.exception.PersonNotFoundException;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.repository.PersonRepository;
 
@@ -38,8 +37,7 @@ public class PersonService {
      * @return
      */
     public Person findPersonById(Integer id) {
-        return personRepository.findPersonById(id)
-                .orElseThrow(() -> new PersonNotFoundException("The person was not found"));
+        return personRepository.findPersonById(id);
     }
 
     /**

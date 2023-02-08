@@ -4,7 +4,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.exception.UserNotFoundException;
 import com.cfm.Yolo.model.User;
 import com.cfm.Yolo.repository.UserRepository;
 
@@ -23,8 +22,7 @@ public class UserService {
      * @return
      */
     public User findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User by name" + username + "was not found"));
+        return userRepository.findUserByUsername(username);
     }
 
     // TODO: Função `getUser` está com erro ao executar; a função entra em loop
@@ -33,8 +31,7 @@ public class UserService {
      * @return
      */
     public User getUser(Integer id) {
-        return userRepository.findUserById(id)
-                .orElseThrow(() -> new UserNotFoundException("Usuátio com id " + id + " não foi encontrado"));
+        return userRepository.findUserById(id);
     }
 
 }
