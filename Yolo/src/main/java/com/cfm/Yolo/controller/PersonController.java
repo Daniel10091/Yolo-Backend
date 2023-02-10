@@ -37,24 +37,6 @@ public class PersonController {
         }
     }
 
-    // @PutMapping("/edit")
-    // public ResponseEntity<PersonDto> editAccount(@RequestBody PersonDto
-    // personDto) {
-    // var dto = new PersonDto();
-    // dto.setCode(personDto.getCode());
-    // dto.setName(personDto.getName());
-    // dto.setGender(personDto.getGender());
-    // dto.setAvatar(personDto.getAvatar());
-    // dto.setBackground(personDto.getBackground());
-    // dto.setUsername(personDto.getUsername());
-    // dto.setSalt(personDto.getSalt());
-    // dto.setHash(personDto.getHash());
-    // dto.setCreatedDate(personDto.getCreatedDate());
-    // dto.setUserCreatedDate(personDto.getUserCreatedDate());
-    // var newPerson = personService.saveAccount(dto);
-    // return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
-    // }
-
     @PostMapping("/save")
     public ResponseEntity<PersonDto> saveAccount(@RequestBody PersonDto personDto) {
         var dto = new PersonDto();

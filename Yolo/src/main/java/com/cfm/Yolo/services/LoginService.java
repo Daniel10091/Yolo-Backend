@@ -14,7 +14,6 @@ import com.cfm.Yolo.repository.UserRepository;
 
 @Service
 @Transactional
-
 public class LoginService {
 
     private final UserRepository userRepository;

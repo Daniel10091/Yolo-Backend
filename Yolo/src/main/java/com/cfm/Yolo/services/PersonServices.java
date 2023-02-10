@@ -20,14 +20,25 @@ public class PersonServices {
         this.personRepository = personRepository;
     }
 
+    /**
+     * @return
+     */
     public List<Person> listAllPeople() {
         return personRepository.findAll();
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Person findPersonById(Integer id) {
         return personRepository.findPersonById(id);
     }
 
+    /**
+     * @param personDto
+     * @return
+     */
     public PersonDto savePerson(PersonDto personDto) {
         Person person = null;
         if (personDto.getCode() != null) {

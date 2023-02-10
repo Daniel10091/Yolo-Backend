@@ -46,6 +46,7 @@ CREATE TABLE user (
     username VARCHAR(100) NOT NULL,
     salt VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    status VARCHAR(7) NOT NULL,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_user PRIMARY KEY (id),
     CONSTRAINT fk_user_person FOREIGN KEY (id) REFERENCES person(id)
@@ -125,4 +126,21 @@ CREATE TABLE stories_likes (
     CONSTRAINT pk_stories_likes PRIMARY KEY (id),
     CONSTRAINT fk_stories_likes_user FOREIGN KEY (user_id) REFERENCES user(id),
     CONSTRAINT fk_stories_likes_stories FOREIGN KEY (stories_id) REFERENCES stories(id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE permisions (
+    id INT NOT NULL,
+    route VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    CONSTRAINT pk_route PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE user_permisions (
+    id INT NOT NULL,
+    user_id INT NOT NULL,
+    route VARCHAR(100) NOT NULL,
+    name varchar(100) NOT NULL,
+    CONSTRAINT pk_route PRIMARY KEY (id),
+    CONSTRAINT fk_permisions_user FOREIGN KEY (user_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
