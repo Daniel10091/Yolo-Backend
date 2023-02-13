@@ -53,6 +53,7 @@ public class PersonServices {
                     person.getUser().setUsername(personDto.getUsername());
                     person.getUser().setSalt(personDto.getSalt());
                     person.getUser().setPassword(personDto.getPassword());
+                    person.getUser().setStatus(personDto.getStatus());
                 }
             } else {
                 return null;
@@ -63,6 +64,7 @@ public class PersonServices {
             person.getUser().setUsername(personDto.getUsername());
             person.getUser().setSalt(personDto.getSalt());
             person.getUser().setPassword(personDto.getPassword());
+            person.getUser().setStatus(personDto.getStatus());
         }
 
 //        var lista = new ArrayList<>({person,person.getUsers()});

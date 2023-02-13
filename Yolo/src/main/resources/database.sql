@@ -46,7 +46,7 @@ CREATE TABLE user (
     username VARCHAR(100) NOT NULL,
     salt VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    status VARCHAR(7) NOT NULL,
+    status VARCHAR(7) NOT NULL DEFAULT "online",
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_user PRIMARY KEY (id),
     CONSTRAINT fk_user_person FOREIGN KEY (id) REFERENCES person(id)

@@ -52,6 +52,7 @@ public class PersonController {
         dto.setUsername(personDto.getUsername());
         dto.setSalt(personDto.getSalt());
         dto.setPassword(personDto.getPassword());
+        dto.setStatus(personDto.getStatus());
         dto.setCreatedDate(personDto.getCreatedDate());
         dto.setUserCreatedDate(personDto.getUserCreatedDate());
         var newPerson = personService.saveAccount(dto);
