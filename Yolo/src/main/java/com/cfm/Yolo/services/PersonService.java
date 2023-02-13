@@ -65,6 +65,7 @@ public class PersonService {
                 // person.getUser().setSalt(personDto.getSalt());
                 person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
                 person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
+                if (personDto.getStatus() != null) person.getUser().setStatus(personDto.getStatus());
             } else {
                 return null;
             }
