@@ -62,7 +62,6 @@ public class PersonService {
                 person.getUser().setAvatar(personDto.getAvatar());
                 person.getUser().setBackground(personDto.getBackground());
                 person.getUser().setUsername(personDto.getUsername());
-                // person.getUser().setSalt(personDto.getSalt());
                 person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
                 person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
                 if (personDto.getStatus() != null) person.getUser().setStatus(personDto.getStatus());

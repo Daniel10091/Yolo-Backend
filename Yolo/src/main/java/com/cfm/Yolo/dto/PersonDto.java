@@ -56,9 +56,7 @@ public class PersonDto implements Serializable {
         person.getUser().setUsername(this.getUsername());
         person.getUser().setSalt(this.getSalt());
         person.getUser().setPassword(this.getPassword());
-        if (person.getUser().getStatus() != null) {
-            person.getUser().setStatus(this.getStatus());
-        }
+        person.getUser().setStatus(this.getStatus());
         person.getUser().setCreatedDate(this.getCreatedDate());
         return person;
     }

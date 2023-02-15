@@ -3,6 +3,7 @@ CREATE TABLE person (
     name VARCHAR(255) NOT NULL,
     gender VARCHAR(1) DEFAULT "N",
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT ck_person CHECK (gender IN ("F", "M", "N")),
     CONSTRAINT pk_person PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

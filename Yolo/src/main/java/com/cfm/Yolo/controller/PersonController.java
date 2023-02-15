@@ -1,15 +1,15 @@
 package com.cfm.Yolo.controller;
 
-import com.cfm.Yolo.converts.PersonConvert;
-import com.cfm.Yolo.dto.PersonDto;
-import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.services.PersonService;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.cfm.Yolo.converts.PersonConvert;
+import com.cfm.Yolo.dto.PersonDto;
+import com.cfm.Yolo.model.Person;
+import com.cfm.Yolo.services.PersonService;
 
 @RestController
 @RequestMapping("/yolo/api/person")
@@ -38,25 +38,14 @@ public class PersonController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<PersonDto> saveAccount(@RequestBody PersonDto personDto) {
-        var dto = new PersonDto();
-
-        if (personDto.getCode() != null) {
-            dto.setCode(personDto.getCode());
+    public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) {
+        try {
+            var newPerson = personService.saveAccount(personDto);
+            return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
+        } catch (Exception e) {
+            System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
+            return new ResponseEntity<String>("Erro ao tentar salvar o usuário. Verifique se os campos obrigatórios foram preenchidos", HttpStatus.BAD_REQUEST);
         }
-
-        dto.setName(personDto.getName());
-        dto.setGender(personDto.getGender());
-        dto.setAvatar(personDto.getAvatar());
-        dto.setBackground(personDto.getBackground());
-        dto.setUsername(personDto.getUsername());
-        dto.setSalt(personDto.getSalt());
-        dto.setPassword(personDto.getPassword());
-        dto.setStatus(personDto.getStatus());
-        dto.setCreatedDate(personDto.getCreatedDate());
-        dto.setUserCreatedDate(personDto.getUserCreatedDate());
-        var newPerson = personService.saveAccount(dto);
-        return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
     }
 
     // @PostMapping("/save")

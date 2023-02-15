@@ -7,7 +7,9 @@ import java.util.Base64;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cfm.Yolo.model.User;
 import com.cfm.Yolo.repository.UserRepository;
@@ -30,6 +32,13 @@ public class LoginService {
         return userRepository.findUserByUsername(username);
     }
 
+    /**
+     * @param username
+     * @return
+     */
+    // @Query("SELECT * FROM person WHERE name LIKE '%:name%'")
+    // public User findUserByUsername(@PathVariable("name") String name);
+
     // TODO: A função `login` recebe o nome de usuário correspondente fo banco de
     // dados, e usa a função `checkPassword` para verificar se a senha fornecida é
     // válida.
@@ -48,12 +57,8 @@ public class LoginService {
             return null;
         }
 
-        if (user != null) {
-            if (checkPassword(password, user.getPassword(), user.getSalt())) {
-                return user.getId();
-            } else {
-                return null;
-            }
+        if (user != null && checkPassword(password, user.getPassword(), user.getSalt())) {
+            return user.getId();
         } else {
             return null;
         }
