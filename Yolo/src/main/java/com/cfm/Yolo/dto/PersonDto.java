@@ -25,7 +25,7 @@ public class PersonDto implements Serializable {
     private String username;
     private String salt;
     private String password;
-    private String status;
+    private Boolean status;
     private Instant userCreatedDate;
 
     public PersonDto(Person person) {

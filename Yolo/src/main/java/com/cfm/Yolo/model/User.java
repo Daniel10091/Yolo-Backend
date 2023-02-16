@@ -2,7 +2,11 @@ package com.cfm.Yolo.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.bytebuddy.utility.nullability.NeverNull.ByDefault;
+
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -40,7 +44,7 @@ public class User {
     private String password;
 
     @Column(name = "status", length = 7)
-    private String status;
+    private Boolean status;
 
     @Column(name = "created_date")
     @CreationTimestamp
