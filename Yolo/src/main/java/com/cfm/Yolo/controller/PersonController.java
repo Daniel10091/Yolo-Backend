@@ -44,7 +44,9 @@ public class PersonController {
             return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
         } catch (Exception e) {
             System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
-            return new ResponseEntity<String>("Erro ao tentar salvar o usuário. Verifique se os campos obrigatórios foram preenchidos", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String>(
+                    "Erro ao tentar salvar o usuário. Verifique se os campos obrigatórios foram preenchidos",
+                    HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -38,17 +38,17 @@ public class PersonDto implements Serializable {
         this.username = person.getUser().getUsername();
         this.salt = person.getUser().getSalt();
         this.password = person.getUser().getPassword();
-        this.status = person.getUser().getStatus();
         this.userCreatedDate = person.getUser().getCreatedDate();
-//        if (person.getUser() != null) {
-//        }
+        // if (person.getUser() != null) {
+        // }
     }
 
     public Person toModel() {
-        var person =  new Person();
+        var person = new Person();
         person.setId(this.getCode());
         person.setName(this.getName());
         person.setGender(this.getGender());
+        person.setCreatedDate(this.getCreatedDate());
         person.setUser(new User());
         person.getUser().setPerson(person);
         person.getUser().setAvatar(this.getAvatar());
@@ -56,8 +56,7 @@ public class PersonDto implements Serializable {
         person.getUser().setUsername(this.getUsername());
         person.getUser().setSalt(this.getSalt());
         person.getUser().setPassword(this.getPassword());
-        person.getUser().setStatus(this.getStatus());
-        person.getUser().setCreatedDate(this.getCreatedDate());
+        person.getUser().setCreatedDate(this.getUserCreatedDate());
         return person;
     }
 }
