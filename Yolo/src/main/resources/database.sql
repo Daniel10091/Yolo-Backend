@@ -55,13 +55,13 @@ CREATE TABLE user (
 
 CREATE TABLE friends (
     id INT NOT NULL AUTO_INCREMENT,
-    person_id INT NOT NULL,
+    user_id INT NOT NULL,
     friend_id INT NOT NULL,
     approved BOOLEAN NOT NULL DEFAULT FALSE,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_friend PRIMARY KEY (id),
-    CONSTRAINT fk_friend_person FOREIGN KEY (person_id) REFERENCES person(id),
-    CONSTRAINT fk_friend_user FOREIGN KEY (friend_id) REFERENCES user(id)
+    CONSTRAINT fk_friend_user FOREIGN KEY (user_id) REFERENCES user(id),
+    CONSTRAINT fk_friend_friend FOREIGN KEY (friend_id) REFERENCES user(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE posts (

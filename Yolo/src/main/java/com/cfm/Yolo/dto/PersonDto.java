@@ -25,7 +25,7 @@ public class PersonDto implements Serializable {
     private String username;
     private String salt;
     private String password;
-    private Boolean status;
+    private Boolean online = true;
     private Instant userCreatedDate;
 
     public PersonDto(Person person) {
@@ -38,6 +38,7 @@ public class PersonDto implements Serializable {
         this.username = person.getUser().getUsername();
         this.salt = person.getUser().getSalt();
         this.password = person.getUser().getPassword();
+        this.online = person.getUser().getOnline();
         this.userCreatedDate = person.getUser().getCreatedDate();
         // if (person.getUser() != null) {
         // }
@@ -56,6 +57,7 @@ public class PersonDto implements Serializable {
         person.getUser().setUsername(this.getUsername());
         person.getUser().setSalt(this.getSalt());
         person.getUser().setPassword(this.getPassword());
+        person.getUser().setOnline(this.getOnline());
         person.getUser().setCreatedDate(this.getUserCreatedDate());
         return person;
     }

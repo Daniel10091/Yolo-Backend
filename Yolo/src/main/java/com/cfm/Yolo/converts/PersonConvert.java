@@ -19,7 +19,7 @@ public class PersonConvert {
         personDto.setUsername(person.getUser().getUsername());
         personDto.setSalt(person.getUser().getSalt());
         personDto.setPassword(person.getUser().getPassword());
-        personDto.setStatus(person.getUser().getStatus());
+        personDto.setOnline(person.getUser().getOnline());
         personDto.setUserCreatedDate(person.getUser().getCreatedDate());
         return personDto;
     }
@@ -39,7 +39,7 @@ public class PersonConvert {
         person.getUser().setUsername(personDto.getUsername());
         person.getUser().setSalt(personDto.getSalt());
         person.getUser().setPassword(personDto.getPassword());
-        person.getUser().setStatus(personDto.getStatus());
+        person.getUser().setOnline(personDto.getOnline());
         person.getUser().setCreatedDate(personDto.getUserCreatedDate());
         return person;
     }

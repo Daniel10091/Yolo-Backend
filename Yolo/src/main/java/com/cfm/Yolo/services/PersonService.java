@@ -47,7 +47,7 @@ public class PersonService {
     public Person saveAccount(PersonDto personDto) {
         Person saveReturn = null;
         Person person = null;
-        //var entity = PersonConvert.convertPerson(personDto);
+        // var entity = PersonConvert.convertPerson(personDto);
 
         byte[] salt = generateSalt();
 
@@ -56,7 +56,7 @@ public class PersonService {
 
         if (personDto.getCode() != null) {
             person = personRepository.findById(personDto.getCode()).get();
-            if (person !=  null) {
+            if (person != null) {
                 person.setName(personDto.getName());
                 person.setGender(personDto.getGender());
                 person.getUser().setAvatar(personDto.getAvatar());
@@ -64,7 +64,8 @@ public class PersonService {
                 person.getUser().setUsername(personDto.getUsername());
                 person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
                 person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-                if (personDto.getStatus() != null) person.getUser().setStatus(personDto.getStatus());
+                if (personDto.getOnline() != null)
+                    person.getUser().setOnline(personDto.getOnline());
             } else {
                 return null;
             }
@@ -73,11 +74,13 @@ public class PersonService {
         }
         saveReturn = personRepository.save(person);
         return saveReturn != null ? saveReturn : null;
-        //return new Person(PersonConvert.convertPersonDto(saveReturn));
+        // return new Person(PersonConvert.convertPersonDto(saveReturn));
     }
 
-    // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a senha antes da criptografia. 
-    // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão hashes diferentes armazenados no banco de dados.
+    // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a
+    // senha antes da criptografia.
+    // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão
+    // hashes diferentes armazenados no banco de dados.
     /**
      * @return
      */

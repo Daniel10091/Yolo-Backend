@@ -48,8 +48,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "status", length = 7)
-    private Boolean status = true;
+    @Column(name = "online", nullable = false)
+    private Boolean online = true;
 
     @Column(name = "created_date", nullable = false)
     @CreationTimestamp

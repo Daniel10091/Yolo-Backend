@@ -43,7 +43,7 @@ public class PersonServices {
         Person person = null;
         if (personDto.getCode() != null) {
             var personE = personRepository.findById(personDto.getCode());
-            if (personE !=  null) {
+            if (personE != null) {
                 person = personE.get();
                 person.setName(personDto.getName());
                 person.setGender(personDto.getGender());
@@ -53,7 +53,7 @@ public class PersonServices {
                     person.getUser().setUsername(personDto.getUsername());
                     person.getUser().setSalt(personDto.getSalt());
                     person.getUser().setPassword(personDto.getPassword());
-                    person.getUser().setStatus(personDto.getStatus());
+                    person.getUser().setOnline(personDto.getOnline());
                 }
             } else {
                 return null;
@@ -64,14 +64,14 @@ public class PersonServices {
             person.getUser().setUsername(personDto.getUsername());
             person.getUser().setSalt(personDto.getSalt());
             person.getUser().setPassword(personDto.getPassword());
-            person.getUser().setStatus(personDto.getStatus());
+            person.getUser().setOnline(personDto.getOnline());
         }
 
-//        var lista = new ArrayList<>({person,person.getUsers()});
-//
-//        var apersonReturn = personRepository.saveAll(Arrays.asList());
-//
-//        var personReturn = apersonReturn[0];
+        // var lista = new ArrayList<>({person,person.getUsers()});
+        //
+        // var apersonReturn = personRepository.saveAll(Arrays.asList());
+        //
+        // var personReturn = apersonReturn[0];
         var personReturn = personRepository.save(person);
         return personReturn != null ? PersonConvert.convertPersonDto(personReturn) : null;
     }

@@ -1,4 +1,4 @@
 -- use yolo;
 
 
-select * from person;
+select * from user;
