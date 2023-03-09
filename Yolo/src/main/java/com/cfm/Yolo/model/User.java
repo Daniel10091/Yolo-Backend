@@ -26,7 +26,7 @@ public class User {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @OneToOne(optional = true)
     @JoinColumn(name = "id")

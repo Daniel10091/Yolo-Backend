@@ -14,16 +14,19 @@ import lombok.NoArgsConstructor;
 @Data
 public class EmailDto {
 
-  private Integer code;
+  private Long code;
+  private Long personId;
   private String email;
   private Instant createdDate;
+  private Person person;
 
-  public Email toModel() {
+  public Email toModel(Person person) {
     Email email = new Email();
     email.setId(this.getCode());
-    email.setPerson(new Person());
+    email.setPersonId(this.getPersonId());
     email.setEmail(this.getEmail());
     email.setCreatedDate(this.getCreatedDate());
+    this.setPerson(person);
     return email;
   }
 

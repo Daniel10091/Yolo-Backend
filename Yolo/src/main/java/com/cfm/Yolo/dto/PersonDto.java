@@ -16,10 +16,11 @@ import java.time.Instant;
 @NoArgsConstructor
 @Data
 public class PersonDto implements Serializable {
-    private Integer code;
+    private Long code;
     private String name;
     private String gender;
     private Instant createdDate;
+    private Long userId;
     private byte[] avatar;
     private byte[] background;
     private String username;
@@ -32,6 +33,7 @@ public class PersonDto implements Serializable {
         this.code = person.getId();
         this.name = person.getName();
         this.gender = person.getGender();
+        this.userId = person.getUser().getId();
         this.avatar = person.getUser().getAvatar();
         this.background = person.getUser().getBackground();
         this.createdDate = person.getCreatedDate();
@@ -52,6 +54,7 @@ public class PersonDto implements Serializable {
         person.setCreatedDate(this.getCreatedDate());
         person.setUser(new User());
         person.getUser().setPerson(person);
+        person.getUser().setId(this.getUserId());
         person.getUser().setAvatar(this.getAvatar());
         person.getUser().setBackground(this.getBackground());
         person.getUser().setUsername(this.getUsername());

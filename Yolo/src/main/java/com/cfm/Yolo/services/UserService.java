@@ -30,7 +30,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public User getUser(Integer id) {
+    public User getUser(Long id) {
         return userRepository.findUserById(id);
     }
 

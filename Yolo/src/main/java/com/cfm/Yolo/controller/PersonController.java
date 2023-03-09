@@ -28,7 +28,7 @@ public class PersonController {
   }
 
   @GetMapping("/find/{id}")
-  public ResponseEntity<?> findPersonById(@PathVariable("id") Integer id) {
+  public ResponseEntity<?> findPersonById(@PathVariable("id") Long id) {
     try {
       Person person = personService.findPersonById(id);
       return ResponseEntity.ok(PersonConvert.convertPersonDto(person));

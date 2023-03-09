@@ -22,7 +22,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto dto) {
-        Integer reponse = loginService.login(dto.getUsername(), dto.getPassword());
+        Long reponse = loginService.login(dto.getUsername(), dto.getPassword());
         return (reponse != null) ? new ResponseEntity<>(reponse, HttpStatus.OK)
                 : new ResponseEntity<String>("Nome de usuário ou senha incorreto", HttpStatus.NOT_FOUND);
     }

@@ -36,7 +36,7 @@ public class FriendsController {
   }
 
   @GetMapping("/getFriend/{id}")
-  public UserDto findFriendById(String id) {
+  public UserDto findFriendById(Long id) {
 
 
     return null;
