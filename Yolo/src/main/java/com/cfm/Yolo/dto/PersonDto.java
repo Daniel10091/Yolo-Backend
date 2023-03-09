@@ -12,9 +12,9 @@ import java.time.Instant;
 /**
  * A DTO for the {@link com.cfm.Yolo.model.Person} entity
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class PersonDto implements Serializable {
     private Integer code;
     private String name;
