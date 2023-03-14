@@ -4,6 +4,9 @@ import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.repository.PersonRepository;
 
+import com.cfm.Yolo.mappers.PersonMapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,9 +23,11 @@ import java.util.List;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
         this.personRepository = personRepository;
+        this.personMapper = personMapper;
     }
 
     /**
@@ -64,12 +69,13 @@ public class PersonService {
                 person.getUser().setUsername(personDto.getUsername());
                 person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
                 person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-                if (personDto.getStatus() != null) person.getUser().setStatus(personDto.getStatus());
+                person.getUser().setOnline(personDto.getOnline());
             } else {
                 return null;
             }
         } else {
-            person = personDto.toModel();
+            person = personMapper.toEntity(personDto);
+            person.getUser().setPerson(person);
         }
         saveReturn = personRepository.save(person);
         return saveReturn != null ? saveReturn : null;

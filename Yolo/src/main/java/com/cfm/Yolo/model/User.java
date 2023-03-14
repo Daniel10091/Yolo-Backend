@@ -43,8 +43,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "status", length = 7)
-    private Boolean status;
+    @Column(name = "online")
+    private Boolean online = true;
 
     @Column(name = "created_date")
     @CreationTimestamp
@@ -68,7 +68,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<MessageLike> messageLikes = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new LinkedHashSet<>();
 
 }

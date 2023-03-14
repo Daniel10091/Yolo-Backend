@@ -25,8 +25,8 @@ public class Person {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "gender", length = 20)
-    private String gender;
+    @Column(name = "gender", length = 1, nullable = false)
+    private String gender = "N";
 
     @Column(name = "created_date", nullable = false)
     @CreationTimestamp
