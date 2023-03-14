@@ -30,34 +30,34 @@ public class PersonService {
         this.personMapper = personMapper;
     }
 
-    /**
-     * @return
-     */
-    public List<Person> listAllPeople() {
-        return personRepository.findAll();
-    }
+  /**
+   * @return
+   */
+  public List<Person> listAllPeople() {
+    return personRepository.findAll();
+  }
 
-    /**
-     * @param id
-     * @return
-     */
-    public Person findPersonById(Integer id) {
-        return personRepository.findPersonById(id);
-    }
+  /**
+   * @param id
+   * @return
+   */
+  public Person findPersonById(Long id) {
+    return personRepository.findPersonById(id);
+  }
 
-    /**
-     * @param personDto
-     * @return
-     */
-    public Person saveAccount(PersonDto personDto) {
-        Person saveReturn = null;
-        Person person = null;
-        //var entity = PersonConvert.convertPerson(personDto);
+  /**
+   * @param personDto
+   * @return
+   */
+  public Person saveAccount(PersonDto personDto) {
+    Person saveReturn = null;
+    Person person = null;
+    // var entity = PersonConvert.convertPerson(personDto);
 
-        byte[] salt = generateSalt();
+    byte[] salt = generateSalt();
 
-        personDto.setPassword(encryptPassword(personDto.getPassword(), salt));
-        personDto.setSalt(Base64.getEncoder().encodeToString(salt));
+    personDto.setPassword(encryptPassword(personDto.getPassword(), salt));
+    personDto.setSalt(Base64.getEncoder().encodeToString(salt));
 
         if (personDto.getCode() != null) {
             person = personRepository.findById(personDto.getCode()).get();
@@ -82,32 +82,34 @@ public class PersonService {
         //return new Person(PersonConvert.convertPersonDto(saveReturn));
     }
 
-    // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a senha antes da criptografia. 
-    // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão hashes diferentes armazenados no banco de dados.
-    /**
-     * @return
-     */
-    private byte[] generateSalt() {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        return salt;
-    }
+  // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a
+  // senha antes da criptografia.
+  // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão
+  // hashes diferentes armazenados no banco de dados.
+  /**
+   * @return
+   */
+  private byte[] generateSalt() {
+    SecureRandom random = new SecureRandom();
+    byte[] salt = new byte[16];
+    random.nextBytes(salt);
+    return salt;
+  }
 
-    /**
-     * @param password
-     * @param salt
-     * @return
-     */
-    private String encryptPassword(String password, byte[] salt) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.update(salt);
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(hash);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+  /**
+   * @param password
+   * @param salt
+   * @return
+   */
+  private String encryptPassword(String password, byte[] salt) {
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      digest.update(salt);
+      byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+      return Base64.getEncoder().encodeToString(hash);
+    } catch (NoSuchAlgorithmException e) {
+      throw new RuntimeException(e);
     }
+  }
 
 }

@@ -20,7 +20,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -44,7 +44,8 @@ public class Person {
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
     private User user;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    // @JoinColumn(name = "id", referencedColumnName = "person_id")
     private Set<Email> emails = new LinkedHashSet<>();
 
 }

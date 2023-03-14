@@ -1,17 +1,22 @@
 package com.cfm.Yolo.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import net.bytebuddy.utility.nullability.NeverNull.ByDefault;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
-import javax.persistence.*;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -21,7 +26,7 @@ public class User {
 
     @Id
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @OneToOne(optional = true)
     @JoinColumn(name = "id")
@@ -43,10 +48,10 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "online")
+    @Column(name = "online", nullable = false)
     private Boolean online = true;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", nullable = false)
     @CreationTimestamp
     private Instant createdDate;
 

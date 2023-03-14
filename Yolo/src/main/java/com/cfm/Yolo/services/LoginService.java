@@ -48,7 +48,7 @@ public class LoginService {
      * @param password
      * @return
      */
-    public Integer login(String username, String password) {
+    public Long login(String username, String password) {
         User user = new User();
 
         try {

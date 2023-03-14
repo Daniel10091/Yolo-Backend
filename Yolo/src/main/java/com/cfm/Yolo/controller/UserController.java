@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/getUser/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
         try {
             Person response = personService.findPersonById(id);
             return ResponseEntity.ok(PersonConvert.convertPersonDto(response));
