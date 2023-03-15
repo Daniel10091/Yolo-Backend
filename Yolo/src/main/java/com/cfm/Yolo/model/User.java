@@ -73,7 +73,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<MessageLike> messageLikes = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Post> posts = new LinkedHashSet<>();
 
 }

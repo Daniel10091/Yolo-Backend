@@ -33,10 +33,8 @@ public class PersonDto implements Serializable {
         this.code = person.getId();
         this.name = person.getName();
         this.gender = person.getGender();
-        this.userId = person.getUser().getId();
         this.avatar = person.getUser().getAvatar();
         this.background = person.getUser().getBackground();
-        this.createdDate = person.getCreatedDate();
         this.username = person.getUser().getUsername();
         this.salt = person.getUser().getSalt();
         this.password = person.getUser().getPassword();
@@ -51,7 +49,6 @@ public class PersonDto implements Serializable {
         person.setId(this.getCode());
         person.setName(this.getName());
         person.setGender(this.getGender());
-        person.setCreatedDate(this.getCreatedDate());
         person.setUser(new User());
         person.getUser().setPerson(person);
         person.getUser().setId(this.getUserId());
