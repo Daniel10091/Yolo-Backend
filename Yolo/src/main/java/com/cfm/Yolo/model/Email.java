@@ -5,11 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.Instant;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "emails")
 public class Email {
@@ -19,8 +16,8 @@ public class Email {
   @Column(name = "id", nullable = false)
   private Long id;
 
-  @Column(name = "person_id", nullable = false)
-  private Long personId;
+  // @Column(name = "person_id", nullable = false)
+  // private Long personId;
 
   @Column(name = "email", nullable = false)
   private String email;
@@ -28,8 +25,8 @@ public class Email {
   @Column(name = "created_date", nullable = false)
   private Instant createdDate;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "person_id", referencedColumnName = "id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "person_id")
   private Person person;
 
 }

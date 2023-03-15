@@ -44,7 +44,7 @@ public class Person {
     @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
     private User user;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JoinColumn(name = "id", referencedColumnName = "person_id")
     private Set<Email> emails = new LinkedHashSet<>();
 

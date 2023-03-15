@@ -11,7 +11,7 @@ public class EmailConvert {
   public static EmailDto convertEmailDto(Email email) {
     EmailDto emailDto = new EmailDto();
     emailDto.setCode(email.getId());
-    emailDto.setPersonId(email.getPersonId());
+    emailDto.setPerson(email.getPerson());
     emailDto.setEmail(email.getEmail());
     emailDto.setCreatedDate(email.getCreatedDate());
     return emailDto;
@@ -24,7 +24,7 @@ public class EmailConvert {
   public static Email convertEmailEntity(EmailDto emailDto) {
     Email email = new Email();
     email.setId(emailDto.getCode());
-    email.setPersonId(emailDto.getPersonId());
+    email.setPerson(emailDto.getPerson());
     email.setEmail(emailDto.getEmail());
     email.setCreatedDate(emailDto.getCreatedDate());
     return email;

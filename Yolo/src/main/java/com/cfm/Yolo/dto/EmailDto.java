@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class EmailDto {
 
   private Long code;
-  private Long personId;
+  // private Long personId;
   private String email;
   private Instant createdDate;
   private Person person;
@@ -23,10 +23,10 @@ public class EmailDto {
   public Email toModel(Person person) {
     Email email = new Email();
     email.setId(this.getCode());
-    email.setPersonId(this.getPersonId());
+    this.setPerson(person);
+    email.setPerson(this.getPerson());
     email.setEmail(this.getEmail());
     email.setCreatedDate(this.getCreatedDate());
-    this.setPerson(person);
     return email;
   }
 
