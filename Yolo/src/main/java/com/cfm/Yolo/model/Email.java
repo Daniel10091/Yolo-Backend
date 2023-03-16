@@ -3,6 +3,9 @@ package com.cfm.Yolo.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.Instant;
 
 @Getter
@@ -12,7 +15,7 @@ import java.time.Instant;
 public class Email {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 
@@ -23,6 +26,7 @@ public class Email {
   private String email;
 
   @Column(name = "created_date", nullable = false)
+  @CreationTimestamp
   private Instant createdDate;
 
   @ManyToOne

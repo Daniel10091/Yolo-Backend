@@ -9,13 +9,13 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface PersonMapper {
-    @Mapping(source = "person.id", target = "code")
-    @Mapping(source = "person.user.username", target = "username")
-    @Mapping(source = "person.user.password", target = "password")
-    @Mapping(source = "person.user.online", target = "online")
-    @Mapping(source = "person.user.salt", target = "salt")
-    PersonDto toDto(Person person);
+  @Mapping(source = "person.id", target = "code")
+  @Mapping(source = "person.user.username", target = "username")
+  @Mapping(source = "person.user.password", target = "password")
+  @Mapping(source = "person.user.online", target = "online")
+  @Mapping(source = "person.user.salt", target = "salt")
+  PersonDto toDto(Person person);
 
-    @InheritInverseConfiguration
-    Person toEntity(PersonDto personDto);
+  @InheritInverseConfiguration
+  Person toEntity(PersonDto personDto);
 }
