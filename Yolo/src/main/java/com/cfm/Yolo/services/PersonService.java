@@ -22,13 +22,13 @@ import java.util.List;
 @Transactional
 public class PersonService {
 
-    private final PersonRepository personRepository;
-    private final PersonMapper personMapper;
+  private final PersonRepository personRepository;
+  private final PersonMapper personMapper;
 
-    public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
-        this.personRepository = personRepository;
-        this.personMapper = personMapper;
-    }
+  public PersonService(PersonRepository personRepository, PersonMapper personMapper) {
+    this.personRepository = personRepository;
+    this.personMapper = personMapper;
+  }
 
   /**
    * @return
@@ -59,28 +59,28 @@ public class PersonService {
     personDto.setPassword(encryptPassword(personDto.getPassword(), salt));
     personDto.setSalt(Base64.getEncoder().encodeToString(salt));
 
-        if (personDto.getCode() != null) {
-            person = personRepository.findById(personDto.getCode()).get();
-            if (person !=  null) {
-                person.setName(personDto.getName());
-                person.setGender(personDto.getGender());
-                person.getUser().setAvatar(personDto.getAvatar());
-                person.getUser().setBackground(personDto.getBackground());
-                person.getUser().setUsername(personDto.getUsername());
-                person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
-                person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-                person.getUser().setOnline(personDto.getOnline());
-            } else {
-                return null;
-            }
-        } else {
-            person = personMapper.toEntity(personDto);
-            person.getUser().setPerson(person);
-        }
-        saveReturn = personRepository.save(person);
-        return saveReturn != null ? saveReturn : null;
-        //return new Person(PersonConvert.convertPersonDto(saveReturn));
+    if (personDto.getCode() != null) {
+      person = personRepository.findById(personDto.getCode()).get();
+      if (person != null) {
+        person.setName(personDto.getName());
+        person.setGender(personDto.getGender());
+        person.getUser().setAvatar(personDto.getAvatar());
+        person.getUser().setBackground(personDto.getBackground());
+        person.getUser().setUsername(personDto.getUsername());
+        person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+        person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
+        person.getUser().setOnline(personDto.getOnline());
+      } else {
+        return null;
+      }
+    } else {
+      person = personMapper.toEntity(personDto);
+      person.getUser().setPerson(person);
     }
+    saveReturn = personRepository.save(person);
+    return saveReturn != null ? saveReturn : null;
+    // return new Person(PersonConvert.convertPersonDto(saveReturn));
+  }
 
   // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a
   // senha antes da criptografia.
