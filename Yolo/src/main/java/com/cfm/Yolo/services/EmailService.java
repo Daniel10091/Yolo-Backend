@@ -43,7 +43,7 @@ public class EmailService {
    * @param emailDto
    * @return
    */
-  public Email saveAddress(Long id, EmailDto emailDto) {
+  public Email saveEmail(Long id, EmailDto emailDto) {
     Person person = null;
     Email saveReturn = null;
     Email email = null;

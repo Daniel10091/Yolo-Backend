@@ -3,33 +3,34 @@ package com.cfm.Yolo.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.Instant;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "emails")
 public class Email {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 
-  @Column(name = "person_id", nullable = false)
-  private Long personId;
+  // @Column(name = "person_id", nullable = false)
+  // private Long personId;
 
   @Column(name = "email", nullable = false)
   private String email;
 
   @Column(name = "created_date", nullable = false)
+  @CreationTimestamp
   private Instant createdDate;
 
-  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "person_id", referencedColumnName = "id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "person_id")
   private Person person;
 
 }

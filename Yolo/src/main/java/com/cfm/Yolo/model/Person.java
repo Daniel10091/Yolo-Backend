@@ -17,35 +17,35 @@ import java.util.Set;
 @SecondaryTable(name = "user", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+  @Column(name = "name", nullable = false)
+  private String name;
 
-    @Column(name = "gender", length = 1, nullable = false)
-    private String gender = "N";
+  @Column(name = "gender", length = 1, nullable = false)
+  private String gender = "N";
 
-    @Column(name = "created_date", nullable = false)
-    @CreationTimestamp
-    private Instant createdDate;
+  @Column(name = "created_date", nullable = false)
+  @CreationTimestamp
+  private Instant createdDate;
 
-    @OneToMany(mappedBy = "person")
-    private Set<Friend> friends = new LinkedHashSet<>();
+  @OneToMany(mappedBy = "person")
+  private Set<Friend> friends = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "person")
-    private Set<Address> addresses = new LinkedHashSet<>();
+  @OneToMany(mappedBy = "person")
+  private Set<Address> addresses = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "person")
-    private Set<Phones> phones = new LinkedHashSet<>();
+  @OneToMany(mappedBy = "person")
+  private Set<Phones> phones = new LinkedHashSet<>();
 
-    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
-    private User user;
+  @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
+  private User user;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
-    // @JoinColumn(name = "id", referencedColumnName = "person_id")
-    private Set<Email> emails = new LinkedHashSet<>();
+  @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+  // @JoinColumn(name = "id", referencedColumnName = "person_id")
+  private Set<Email> emails = new LinkedHashSet<>();
 
 }

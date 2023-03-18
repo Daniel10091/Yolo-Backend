@@ -15,21 +15,21 @@ import java.util.Collections;
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
-        CorsConfiguration config = new CorsConfiguration();
-        //config.setAllowCredentials(true);
-        config.setAllowedOrigins(Collections.singletonList("*"));
-        config.setAllowedMethods(Collections.singletonList("*"));
-        config.setAllowedHeaders(Collections.singletonList("*"));
+  @Bean
+  public FilterRegistrationBean<CorsFilter> corsFilterRegistrationBean() {
+    CorsConfiguration config = new CorsConfiguration();
+    // config.setAllowCredentials(true);
+    config.setAllowedOrigins(Collections.singletonList("*"));
+    config.setAllowedMethods(Collections.singletonList("*"));
+    config.setAllowedHeaders(Collections.singletonList("*"));
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", config);
 
-        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>();
-        bean.setFilter(new CorsFilter(source));
+    FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>();
+    bean.setFilter(new CorsFilter(source));
 
-        return bean;
-    }
+    return bean;
+  }
 
 }

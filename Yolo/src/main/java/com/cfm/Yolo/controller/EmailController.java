@@ -43,10 +43,10 @@ public class EmailController {
   }
 
   @PostMapping("/save/{id}")
-  public ResponseEntity<?> saveAddress(@PathVariable("id") Long id, @RequestBody EmailDto emailDto) {
+  public ResponseEntity<?> saveEmail(@PathVariable("id") Long id, @RequestBody EmailDto emailDto) {
     try {
-      var newAddress = emailService.saveAddress(id, emailDto);
-      return ResponseEntity.ok(EmailConvert.convertEmailDto(newAddress));
+      var newEmail = emailService.saveEmail(id, emailDto);
+      return ResponseEntity.ok(EmailConvert.convertEmailDto(newEmail));
     } catch (Exception e) {
       System.out.println(" -> Erro ao tentar salvar o email: " + e.getMessage());
       return new ResponseEntity<String>(
