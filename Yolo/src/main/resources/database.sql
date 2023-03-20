@@ -10,31 +10,31 @@ CREATE TABLE person (
 CREATE TABLE emails (
     id INT NOT NULL AUTO_INCREMENT,
     person_id INT NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_email PRIMARY KEY (id),
     CONSTRAINT fk_email_person FOREIGN KEY (person_id) REFERENCES person(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE phones (
-    id INT AUTO_INCREMENT,
-    person_id INT,
-    ddd VARCHAR(10),
-    phone_number VARCHAR(20),
+    id INT NOT NULL AUTO_INCREMENT,
+    person_id INT NOT NULL,
+    ddd VARCHAR(10) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
     phone_extension VARCHAR (10),
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_phone PRIMARY KEY (id),
     CONSTRAINT fk_phone_person FOREIGN KEY (person_id) REFERENCES person(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE addresses (
-    id INT AUTO_INCREMENT,
-    person_id INT,
-    address VARCHAR(255),
-    district VARCHAR(50),
-    state VARCHAR(50),
-    city VARCHAR(50),
-    cep VARCHAR(20),
+    id INT NOT NULL AUTO_INCREMENT,
+    person_id INT NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    district VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    cep VARCHAR(20) NOT NULL,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT pk_address PRIMARY KEY (id),
     CONSTRAINT fk_address_person FOREIGN KEY (person_id) REFERENCES person(id)

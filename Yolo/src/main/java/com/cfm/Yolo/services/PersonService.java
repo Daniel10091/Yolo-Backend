@@ -1,22 +1,20 @@
 package com.cfm.Yolo.services;
 
-import com.cfm.Yolo.dto.PersonDto;
-import com.cfm.Yolo.model.Person;
-import com.cfm.Yolo.repository.PersonRepository;
-
-import com.cfm.Yolo.mappers.PersonMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import com.cfm.Yolo.dto.PersonDto;
+import com.cfm.Yolo.mappers.PersonMapper;
+import com.cfm.Yolo.model.Person;
+import com.cfm.Yolo.repository.PersonRepository;
 
 @Service
 @Transactional

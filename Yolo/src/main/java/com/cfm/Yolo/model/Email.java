@@ -22,8 +22,8 @@ public class Email {
   // @Column(name = "person_id", nullable = false)
   // private Long personId;
 
-  @Column(name = "email", nullable = false)
-  private String email;
+  @Column(name = "address", nullable = false)
+  private String address;
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
