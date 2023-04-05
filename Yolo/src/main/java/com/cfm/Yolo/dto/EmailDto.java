@@ -16,7 +16,7 @@ public class EmailDto {
 
   private Long code;
   // private Long personId;
-  private String email;
+  private String address;
   private Instant createdDate;
   private Person person;
 
@@ -25,7 +25,7 @@ public class EmailDto {
     email.setId(this.getCode());
     this.setPerson(person);
     email.setPerson(this.getPerson());
-    email.setEmail(this.getEmail());
+    email.setAddress(this.getAddress());
     email.setCreatedDate(this.getCreatedDate());
     return email;
   }
