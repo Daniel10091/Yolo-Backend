@@ -13,6 +13,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "addresses")
 public class Address {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
