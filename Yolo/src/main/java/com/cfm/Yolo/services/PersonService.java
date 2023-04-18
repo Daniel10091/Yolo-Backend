@@ -99,10 +99,8 @@ public class PersonService {
     // return new Person(PersonConvert.convertPersonDto(saveReturn));
   }
 
-  // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a
-  // senha antes da criptografia.
-  // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão
-  // hashes diferentes armazenados no banco de dados.
+  // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a senha antes da criptografia.
+  // TODO: Desta forma, mesmo que dois usuários tenham a mesma senha, eles terão hashes diferentes armazenados no banco de dados.
   /**
    * Generate salt to encrypt the password
    * 
