@@ -1,20 +1,22 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-
-import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.*;
+
+@Table(name = "person")
+@SecondaryTable(name = "user", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "person")
-@SecondaryTable(name = "user", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 public class Person {
 
   @Id
@@ -30,7 +32,7 @@ public class Person {
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
-  private Instant createdDate;
+  private LocalDate createdDate;
 
   @OneToMany(mappedBy = "person")
   private Set<Friend> friends = new LinkedHashSet<>();
@@ -39,7 +41,7 @@ public class Person {
   private Set<Address> addresses = new LinkedHashSet<>();
 
   @OneToMany(mappedBy = "person")
-  private Set<Phones> phones = new LinkedHashSet<>();
+  private Set<Phone> phones = new LinkedHashSet<>();
 
   @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = true)
   private User user;

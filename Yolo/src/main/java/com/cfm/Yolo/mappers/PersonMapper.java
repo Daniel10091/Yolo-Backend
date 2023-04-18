@@ -7,9 +7,10 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper 
 public interface PersonMapper {
   @Mapping(source = "person.id", target = "code")
+  @Mapping(source = "person.user.id", target = "userCode")
   @Mapping(source = "person.user.avatar", target = "avatar")
   @Mapping(source = "person.user.background", target = "background")
   @Mapping(source = "person.user.username", target = "username")

@@ -1,6 +1,7 @@
 package com.cfm.Yolo.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cfm.Yolo.model.Email;
-import com.cfm.Yolo.converts.EmailConvert;
 import com.cfm.Yolo.dto.EmailDto;
+import com.cfm.Yolo.mappers.EmailMapper;
+import com.cfm.Yolo.model.Email;
 import com.cfm.Yolo.services.EmailService;
 
 @RestController
@@ -21,22 +22,25 @@ import com.cfm.Yolo.services.EmailService;
 public class EmailController {
 
   EmailService emailService;
+  EmailMapper emailMapper;
 
-  public EmailController(EmailService emailService) {
+  public EmailController(EmailService emailService, EmailMapper emailMapper) {
     this.emailService = emailService;
+    this.emailMapper = emailMapper;
   }
 
   @GetMapping("/listAll")
   public ResponseEntity<List<EmailDto>> listAllEmais() {
     List<Email> emails = emailService.listAll();
-    return ResponseEntity.ok(EmailConvert.convertEmailDtoToList(emails));
+    var result = emails.stream().map(emailMapper::toDto).collect(Collectors.toList());
+    return result != null ? ResponseEntity.ok(result) : ResponseEntity.noContent().build();
   }
 
   @GetMapping("/find/{id}")
   public ResponseEntity<?> findEmailByCode(@PathVariable("id") Long id) {
     try {
       Email email = emailService.findByCode(id);
-      return ResponseEntity.ok(EmailConvert.convertEmailDto(email));
+      return email != null ? ResponseEntity.ok(emailMapper.toDto(email)) : ResponseEntity.noContent().build();
     } catch (Exception e) {
       return new ResponseEntity<String>("Email não foi encontrado", HttpStatus.NOT_FOUND);
     }
@@ -46,7 +50,7 @@ public class EmailController {
   public ResponseEntity<?> saveEmail(@PathVariable("id") Long id, @RequestBody EmailDto emailDto) {
     try {
       var newEmail = emailService.saveEmail(id, emailDto);
-      return ResponseEntity.ok(EmailConvert.convertEmailDto(newEmail));
+      return ResponseEntity.ok(emailMapper.toDto(newEmail));
     } catch (Exception e) {
       System.out.println(" -> Erro ao tentar salvar o email: " + e.getMessage());
       return new ResponseEntity<String>(

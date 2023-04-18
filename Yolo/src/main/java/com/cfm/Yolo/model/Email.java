@@ -1,17 +1,19 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
+import java.time.LocalDate;
 
 import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import lombok.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "emails")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Email {
 
   @Id
@@ -27,7 +29,7 @@ public class Email {
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
-  private Instant createdDate;
+  private LocalDate createdDate;
 
   @ManyToOne
   @JoinColumn(name = "person_id")

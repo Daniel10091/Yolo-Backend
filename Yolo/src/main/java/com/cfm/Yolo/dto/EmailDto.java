@@ -1,6 +1,6 @@
 package com.cfm.Yolo.dto;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 import com.cfm.Yolo.model.Email;
 import com.cfm.Yolo.model.Person;
@@ -16,8 +16,8 @@ public class EmailDto {
 
   private Long code;
   // private Long personId;
-  private String email;
-  private Instant createdDate;
+  private String address;
+  private LocalDate createdDate;
   private Person person;
 
   public Email toModel(Person person) {
@@ -25,7 +25,7 @@ public class EmailDto {
     email.setId(this.getCode());
     this.setPerson(person);
     email.setPerson(this.getPerson());
-    email.setEmail(this.getEmail());
+    email.setAddress(this.getAddress());
     email.setCreatedDate(this.getCreatedDate());
     return email;
   }

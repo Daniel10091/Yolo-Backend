@@ -1,10 +1,12 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDate;
 
 import javax.persistence.*;
-import java.time.Instant;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,25 +16,26 @@ import java.time.Instant;
 @Entity
 @Table(name = "posts")
 public class Post {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+  @Id
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Column(name = "content", nullable = false)
-    private byte[] content;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
-    @Column(name = "title", length = 30)
-    private String title;
+  @Column(name = "content", nullable = false)
+  private byte[] content;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "title", length = 30)
+  private String title;
 
-    @Column(name = "created_date", nullable = false)
-    @CreationTimestamp
-    private Instant createdDate;
+  @Column(name = "description")
+  private String description;
+
+  @Column(name = "created_date", nullable = false)
+  @CreationTimestamp
+  private LocalDate createdDate;
 
 }

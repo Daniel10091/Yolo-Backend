@@ -1,23 +1,27 @@
 package com.cfm.Yolo.services;
 
-import com.cfm.Yolo.converts.PersonConvert;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
 import com.cfm.Yolo.dto.PersonDto;
+import com.cfm.Yolo.mappers.PersonMapper;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.model.User;
 import com.cfm.Yolo.repository.PersonRepository;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @Transactional
 public class PersonServices {
 
   private final PersonRepository personRepository;
+  private final PersonMapper personMapper;
 
-  public PersonServices(PersonRepository personRepository) {
+  public PersonServices(PersonRepository personRepository, PersonMapper personMapper) {
     this.personRepository = personRepository;
+    this.personMapper = personMapper;
   }
 
   /**
@@ -59,7 +63,7 @@ public class PersonServices {
         return null;
       }
     } else {
-      person = PersonConvert.convertPerson(personDto);
+      person = personMapper.toEntity(personDto);
       person.setUser(new User());
       person.getUser().setUsername(personDto.getUsername());
       person.getUser().setSalt(personDto.getSalt());
@@ -73,6 +77,6 @@ public class PersonServices {
     //
     // var personReturn = apersonReturn[0];
     var personReturn = personRepository.save(person);
-    return personReturn != null ? PersonConvert.convertPersonDto(personReturn) : null;
+    return personReturn != null ? personMapper.toDto(personReturn) : null;
   }
 }

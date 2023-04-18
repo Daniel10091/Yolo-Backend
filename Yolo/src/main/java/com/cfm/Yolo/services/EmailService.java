@@ -51,7 +51,7 @@ public class EmailService {
     if (emailDto.getCode() != null) {
       email = emailRepository.findById(emailDto.getCode()).get();
       if (email != null) {
-        email.setEmail(emailDto.getEmail());
+        email.setAddress(emailDto.getAddress());
         email.setCreatedDate(emailDto.getCreatedDate());
       } else {
         return null;

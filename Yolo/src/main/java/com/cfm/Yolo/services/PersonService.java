@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -29,6 +30,8 @@ public class PersonService {
   }
 
   /**
+   * List all people
+   * 
    * @return
    */
   public List<Person> listAllPeople() {
@@ -36,6 +39,8 @@ public class PersonService {
   }
 
   /**
+   * Find person by id
+   * 
    * @param id
    * @return
    */
@@ -44,12 +49,15 @@ public class PersonService {
   }
 
   /**
+   * Save a account
+   * 
    * @param personDto
    * @return
    */
-  public Person saveAccount(PersonDto personDto) {
+  public Person saveAccount(PersonDto personDto) throws Exception {
     Person saveReturn = null;
     Person person = null;
+    List<Person> people = null;
     // var entity = PersonConvert.convertPerson(personDto);
 
     byte[] salt = generateSalt();
@@ -72,8 +80,19 @@ public class PersonService {
         return null;
       }
     } else {
-      person = personMapper.toEntity(personDto);
-      person.getUser().setPerson(person);
+      people = personRepository.findAll();
+      
+      // TODO: Check if the username is already registered in the database
+      var findUserByUsername = people.stream().map(p -> {
+        if (p.getUser().getUsername() == personDto.getUsername())
+          return p.getUser().getUsername();
+        else return null;
+      }).collect(Collectors.toList());
+
+      if (findUserByUsername != null) {
+        person = personMapper.toEntity(personDto);
+        person.getUser().setPerson(person);
+      } else return null;
     }
     saveReturn = personRepository.save(person);
     return saveReturn != null ? saveReturn : null;
@@ -85,6 +104,8 @@ public class PersonService {
   // TODO: Desta forma, mesmo que dois usuários tenham, a mesma senha, eles terão
   // hashes diferentes armazenados no banco de dados.
   /**
+   * Generate salt to encrypt the password
+   * 
    * @return
    */
   private byte[] generateSalt() {
@@ -95,6 +116,8 @@ public class PersonService {
   }
 
   /**
+   * Encrypt the password using the previously generated salt
+   * 
    * @param password
    * @param salt
    * @return

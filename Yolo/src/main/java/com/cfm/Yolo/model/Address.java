@@ -1,43 +1,45 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
+import java.time.LocalDate;
 
 import javax.persistence.*;
-import java.time.Instant;
 
+import lombok.*;
+
+@Entity
+@Table(name = "addresses")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "addresses")
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id", nullable = false)
+  private Long id;
 
-    @Column(name = "address", nullable = false)
-    private String address;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "person_id", nullable = false)
+  private Person person;
 
-    @Column(name = "district", length = 50)
-    private String district;
+  @Column(name = "address", nullable = false)
+  private String address;
 
-    @Column(name = "state", nullable = false, length = 50)
-    private String state;
+  @Column(name = "district", length = 50)
+  private String district;
 
-    @Column(name = "city", nullable = false, length = 50)
-    private String city;
+  @Column(name = "state", nullable = false, length = 50)
+  private String state;
 
-    @Column(name = "cep", nullable = false, length = 20)
-    private String cep;
+  @Column(name = "city", nullable = false, length = 50)
+  private String city;
 
-    @Column(name = "created_date", nullable = false)
-    private Instant createdDate;
+  @Column(name = "cep", nullable = false, length = 20)
+  private String cep;
+
+  @Column(name = "created_date", nullable = false)
+  private LocalDate createdDate;
 
 }

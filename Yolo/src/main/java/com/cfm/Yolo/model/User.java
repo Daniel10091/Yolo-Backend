@@ -1,28 +1,21 @@
 package com.cfm.Yolo.model;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "user")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
 
   @Id
@@ -54,7 +47,7 @@ public class User {
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
-  private Instant createdDate;
+  private LocalDate createdDate;
 
   @OneToMany(mappedBy = "user")
   private Set<PostLike> postLikes = new LinkedHashSet<>();

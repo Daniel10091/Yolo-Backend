@@ -1,6 +1,8 @@
 package com.cfm.Yolo.dto;
 
 
+import java.time.LocalDate;
+
 import lombok.*;
 
 @NoArgsConstructor
@@ -8,9 +10,13 @@ import lombok.*;
 @Data
 public class UserDto {
   
-  private Long id;
+  private Long code;
   private byte[] avatar;
   private byte[] background;
   private String username;
+  private String salt;
+  private String password;
+  private Boolean online;
+  private LocalDate createdDate;
 
 }

@@ -1,13 +1,15 @@
 package com.cfm.Yolo.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cfm.Yolo.converts.PersonConvert;
 import com.cfm.Yolo.dto.PersonDto;
+import com.cfm.Yolo.exception.PersonNotFoundException;
+import com.cfm.Yolo.mappers.PersonMapper;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.services.PersonService;
 
@@ -16,32 +18,37 @@ import com.cfm.Yolo.services.PersonService;
 public class PersonController {
 
   private final PersonService personService;
+  private final PersonMapper personMapper;
 
-  public PersonController(PersonService personService) {
+  public PersonController(PersonService personService, PersonMapper personMapper) {
     this.personService = personService;
+    this.personMapper = personMapper;
   }
 
   @GetMapping("/listAll")
   public ResponseEntity<List<PersonDto>> listAllPeople() {
-    List<Person> person = personService.listAllPeople();
-    return ResponseEntity.ok(PersonConvert.convertPersonDtoList(person));
+    List<Person> people = personService.listAllPeople();
+    var result = people.stream().map(personMapper::toDto).collect(Collectors.toList());
+    return result != null ? ResponseEntity.ok(result) : ResponseEntity.noContent().build();
   }
 
   @GetMapping("/find/{id}")
   public ResponseEntity<?> findPersonById(@PathVariable("id") Long id) {
     try {
       Person person = personService.findPersonById(id);
-      return ResponseEntity.ok(PersonConvert.convertPersonDto(person));
+      return ResponseEntity.ok(personMapper.toDto(person));
     } catch (Exception e) {
       return new ResponseEntity<String>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
     }
   }
 
   @PostMapping("/save")
-  public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) {
+  public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) throws Exception {
     try {
       var newPerson = personService.saveAccount(personDto);
-      return ResponseEntity.ok(PersonConvert.convertPersonDto(newPerson));
+      if (newPerson != null) 
+        return ResponseEntity.ok(personMapper.toDto(newPerson));
+      else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
     } catch (Exception e) {
       System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
       return new ResponseEntity<String>(
@@ -58,5 +65,11 @@ public class PersonController {
   // (personDto.getCode() != null) ? HttpStatus.OK : HttpStatus.CREATED :
   // HttpStatus.BAD_REQUEST);
   // }
+
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<?> deleteAccount(@PathVariable("id") Long id) {
+    
+    return ResponseEntity.ok(null);
+  }
 
 }

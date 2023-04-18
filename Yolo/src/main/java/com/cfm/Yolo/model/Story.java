@@ -1,38 +1,41 @@
 package com.cfm.Yolo.model;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDate;
 
 import javax.persistence.*;
-import java.time.Instant;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.*;
+
+@Entity
+@Table(name = "stories")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "stories")
 public class Story {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+  @Id
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Column(name = "content", nullable = false)
-    private byte[] content;
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 
-    @Column(name = "title", length = 30)
-    private String title;
+  @Column(name = "content", nullable = false)
+  private byte[] content;
 
-    @Column(name = "description")
-    private String description;
+  @Column(name = "title", length = 30)
+  private String title;
 
-    @Column(name = "created_date", nullable = false)
-    @CreationTimestamp
-    private Instant createdDate;
+  @Column(name = "description")
+  private String description;
+
+  @Column(name = "created_date", nullable = false)
+  @CreationTimestamp
+  private LocalDate createdDate;
 
 }
