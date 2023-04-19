@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-YoloApplication<Yolo>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.cfm.Yolo.YoloApplication",
+      "projectName": "Yolo",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

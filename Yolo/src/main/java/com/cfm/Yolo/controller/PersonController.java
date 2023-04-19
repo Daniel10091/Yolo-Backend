@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
 import com.cfm.Yolo.dto.PersonDto;
 import com.cfm.Yolo.exception.PersonNotFoundException;
+import com.cfm.Yolo.exception.UserAlreadyExistException;
+import com.cfm.Yolo.exception.UserNotFoundException;
 import com.cfm.Yolo.mappers.PersonMapper;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.services.PersonService;
@@ -33,12 +36,12 @@ public class PersonController {
   }
 
   @GetMapping("/find/{id}")
-  public ResponseEntity<?> findPersonById(@PathVariable("id") Long id) {
+  public ResponseEntity<?> findPersonById(@PathVariable("id") Long id) throws Exception {
     try {
       Person person = personService.findPersonById(id);
       return ResponseEntity.ok(personMapper.toDto(person));
-    } catch (Exception e) {
-      return new ResponseEntity<String>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+    } catch (UserNotFoundException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
     }
   }
 
@@ -46,14 +49,12 @@ public class PersonController {
   public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) throws Exception {
     try {
       var newPerson = personService.saveAccount(personDto);
-      if (newPerson != null) 
-        return ResponseEntity.ok(personMapper.toDto(newPerson));
-      else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
-    } catch (Exception e) {
+      return ResponseEntity.ok(personMapper.toDto(newPerson));
+      // if (newPerson != null) 
+      // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
+    } catch (UserAlreadyExistException e) {
       System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
-      return new ResponseEntity<String>(
-          "Erro ao tentar salvar o usuário. Verifique se os campos obrigatórios foram preenchidos",
-          HttpStatus.BAD_REQUEST);
+      return ResponseEntity.badRequest().body(e.getMessage());
     }
   }
 

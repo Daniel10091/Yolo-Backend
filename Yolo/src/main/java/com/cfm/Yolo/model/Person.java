@@ -27,8 +27,11 @@ public class Person {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "gender", length = 1, nullable = false)
+  @Column(name = "gender", length = 1)
   private String gender = "N";
+
+  @Column(name = "birthday")
+  private LocalDate birthday;
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp

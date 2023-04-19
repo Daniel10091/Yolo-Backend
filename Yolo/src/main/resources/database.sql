@@ -2,6 +2,7 @@ CREATE TABLE person (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     gender VARCHAR(1) DEFAULT "N",
+    birthday TIMESTAMP,
     created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT ck_person CHECK (gender IN ("F", "M", "N")),
     CONSTRAINT pk_person PRIMARY KEY (id)

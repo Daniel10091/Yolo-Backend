@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.cfm.Yolo.dto.PersonDto;
+import com.cfm.Yolo.exception.UserAlreadyExistException;
+import com.cfm.Yolo.exception.UserNotFoundException;
 import com.cfm.Yolo.mappers.PersonMapper;
 import com.cfm.Yolo.model.Person;
 import com.cfm.Yolo.repository.PersonRepository;
@@ -45,7 +47,8 @@ public class PersonService {
    * @return
    */
   public Person findPersonById(Long id) {
-    return personRepository.findPersonById(id);
+    return personRepository.findPersonById(id)
+      .orElseThrow(() -> new UserNotFoundException("O usuário com o id " + id + " não existe"));
   }
 
   /**
@@ -57,46 +60,51 @@ public class PersonService {
   public Person saveAccount(PersonDto personDto) throws Exception {
     Person saveReturn = null;
     Person person = null;
-    List<Person> people = null;
-    // var entity = PersonConvert.convertPerson(personDto);
-
-    byte[] salt = generateSalt();
-
-    personDto.setPassword(encryptPassword(personDto.getPassword(), salt));
-    personDto.setSalt(Base64.getEncoder().encodeToString(salt));
 
     if (personDto.getCode() != null) {
       person = personRepository.findById(personDto.getCode()).get();
       if (person != null) {
+        // person = personMapper.toEntity(personDto);
         person.setName(personDto.getName());
+        person.setBirthday(personDto.getBirthday());
         person.setGender(personDto.getGender());
         person.getUser().setAvatar(personDto.getAvatar());
         person.getUser().setBackground(personDto.getBackground());
         person.getUser().setUsername(personDto.getUsername());
-        person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
-        person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-        person.getUser().setOnline(personDto.getOnline());
-      } else {
-        return null;
-      }
+        // person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+        // person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
+        // person.getUser().setOnline(personDto.getOnline());
+      } else throw new UserNotFoundException(
+          "O usuário com o id " + personDto.getCode() + " não foi encontrado"
+        );
     } else {
-      people = personRepository.findAll();
+      // people = personRepository.findAll();
       
       // TODO: Check if the username is already registered in the database
-      var findUserByUsername = people.stream().map(p -> {
-        if (p.getUser().getUsername() == personDto.getUsername())
-          return p.getUser().getUsername();
-        else return null;
-      }).collect(Collectors.toList());
+      // var findUserByUsername = people.stream().map(p -> {
+      //   System.out.println(p.getUser().getUsername());
+      //   if (p.getUser().getUsername() == personDto.getUsername())
+      //     return p.getUser().getUsername();
+      //   else return null;
+      // }).collect(Collectors.toList());
 
-      if (findUserByUsername != null) {
+      var findUserByUsername = personRepository.findPersonByUserUsername(personDto.getUsername());
+
+      if (findUserByUsername == null) {
         person = personMapper.toEntity(personDto);
+        
+        byte[] salt = generateSalt();
+
+        person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
+        person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+
         person.getUser().setPerson(person);
-      } else return null;
+      } else throw new UserAlreadyExistException(
+          "O nome de usuário " + personDto.getUsername() + " já existe"
+        );
     }
     saveReturn = personRepository.save(person);
     return saveReturn != null ? saveReturn : null;
-    // return new Person(PersonConvert.convertPersonDto(saveReturn));
   }
 
   // TODO: A cada novo usuário é gerado um salt aleatório, que é concatenado com a senha antes da criptografia.
