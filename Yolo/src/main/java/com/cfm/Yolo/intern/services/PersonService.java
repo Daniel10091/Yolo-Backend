@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -64,7 +63,6 @@ public class PersonService {
     if (personDto.getCode() != null) {
       person = personRepository.findById(personDto.getCode()).get();
       if (person != null) {
-        // person = personMapper.toEntity(personDto);
         person.setName(personDto.getName());
         person.setBirthday(personDto.getBirthday());
         person.setGender(personDto.getGender());
@@ -73,20 +71,10 @@ public class PersonService {
         person.getUser().setUsername(personDto.getUsername());
         // person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
         // person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-        // person.getUser().setOnline(personDto.getOnline());
       } else throw new UserNotFoundException(
           "O usuário com o id " + personDto.getCode() + " não foi encontrado"
         );
     } else {
-      // people = personRepository.findAll();
-      
-      // TODO: Check if the username is already registered in the database
-      // var findUserByUsername = people.stream().map(p -> {
-      //   System.out.println(p.getUser().getUsername());
-      //   if (p.getUser().getUsername() == personDto.getUsername())
-      //     return p.getUser().getUsername();
-      //   else return null;
-      // }).collect(Collectors.toList());
 
       var findUserByUsername = personRepository.findPersonByUserUsername(personDto.getUsername());
 
