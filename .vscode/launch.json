@@ -5,7 +5,7 @@
       "name": "Spring Boot-YoloApplication<Yolo>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "mainClass": "com.cfm.Yolo.YoloApplication",
+      "mainClass": "com.cfm.Yolo.intern.YoloApplication",
       "projectName": "Yolo",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
