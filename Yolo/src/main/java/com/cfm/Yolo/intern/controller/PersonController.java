@@ -3,13 +3,10 @@ package com.cfm.Yolo.intern.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
 import com.cfm.Yolo.intern.dto.PersonDto;
-import com.cfm.Yolo.intern.exception.PersonNotFoundException;
 import com.cfm.Yolo.intern.exception.UserAlreadyExistException;
 import com.cfm.Yolo.intern.exception.UserNotFoundException;
 import com.cfm.Yolo.intern.mappers.PersonMapper;
