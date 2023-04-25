@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "YoloApplication",
+      "request": "launch",
+      "mainClass": "com.cfm.Yolo.YoloApplication",
+      "projectName": "Yolo"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-YoloApplication<Yolo>",
       "request": "launch",
       "cwd": "${workspaceFolder}",

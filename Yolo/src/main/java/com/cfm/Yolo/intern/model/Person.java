@@ -1,6 +1,7 @@
 package com.cfm.Yolo.intern.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -35,7 +36,7 @@ public class Person {
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
-  private LocalDate createdDate;
+  private LocalDateTime createdDate;
 
   @OneToMany(mappedBy = "person")
   private Set<Friend> friends = new LinkedHashSet<>();

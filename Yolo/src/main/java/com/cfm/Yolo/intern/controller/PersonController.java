@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.cfm.Yolo.intern.dto.ChangePasswordDto;
 import com.cfm.Yolo.intern.dto.PersonDto;
 import com.cfm.Yolo.intern.exception.UserAlreadyExistException;
 import com.cfm.Yolo.intern.exception.UserNotFoundException;
@@ -51,6 +52,33 @@ public class PersonController {
       // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
     } catch (UserAlreadyExistException e) {
       System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+
+  @PutMapping("/update")
+  public ResponseEntity<?> updateAccount(@RequestBody PersonDto personDto) throws Exception {
+    try {
+      var newPerson = personService.saveAccount(personDto);
+      return ResponseEntity.ok(personMapper.toDto(newPerson));
+      // if (newPerson != null) 
+      // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
+    } catch (UserAlreadyExistException e) {
+      System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+
+  @PostMapping("/changePassword/{id}")
+  public ResponseEntity<?> changePassword(
+      @PathVariable("id") Long id, 
+      @RequestBody ChangePasswordDto password
+    ) throws Exception {
+    try {
+      personService.changePassword(id, password.getOldPassword(), password.getNewPassword());
+      return ResponseEntity.ok("Senha atualizada com sucesso!");
+    } catch (Exception e) {
+      System.out.println(" --> Erro ao tentar alterar a senha: " + e.getMessage());
       return ResponseEntity.badRequest().body(e.getMessage());
     }
   }

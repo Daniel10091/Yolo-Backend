@@ -1,6 +1,6 @@
 package com.cfm.Yolo.intern.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -47,7 +47,7 @@ public class User {
 
   @Column(name = "created_date", nullable = false)
   @CreationTimestamp
-  private LocalDate createdDate;
+  private LocalDateTime createdDate;
 
   @OneToMany(mappedBy = "user")
   private Set<PostLike> postLikes = new LinkedHashSet<>();

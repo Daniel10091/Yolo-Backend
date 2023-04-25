@@ -2,6 +2,7 @@ package com.cfm.Yolo.intern.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.cfm.Yolo.intern.model.Person;
 
@@ -21,7 +22,7 @@ public class PersonDto implements Serializable {
     private String name;
     private LocalDate birthday;
     private String gender;
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
     // private Long userCode;
     private byte[] avatar;
     private byte[] background;
