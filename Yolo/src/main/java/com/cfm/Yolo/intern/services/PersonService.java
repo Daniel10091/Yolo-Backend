@@ -58,7 +58,7 @@ public class PersonService {
    * @return
    * @throws Exception
    */
-  public Person saveAccount(PersonDto personDto) throws Exception {
+  public Person saveAccount(PersonDto personDto) {
     Person saveReturn = null;
     Person person = null;
 
@@ -91,7 +91,7 @@ public class PersonService {
         person.getUser().setPerson(person);
       } else 
         throw new UserAlreadyExistException(
-            "O nome de usuário " + personDto.getUsername() + " já existe");
+            "O nome de usuário '" + personDto.getUsername() + "' já existe");
     }
     saveReturn = personRepository.save(person);
     return saveReturn != null ? saveReturn : null;

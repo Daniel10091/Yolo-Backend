@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.cfm.Yolo.intern.exception.UserNotFoundException;
 import com.cfm.Yolo.intern.model.User;
 import com.cfm.Yolo.intern.repository.UserRepository;
 
@@ -28,6 +29,16 @@ public class LoginService {
    */
   public User findUserByUsername(String username) {
     return userRepository.findUserByUsername(username);
+  }
+
+  /**
+   * @param login
+   * @return
+   */
+  public User findUserByLogin(String login) {
+    // throw new NullPointerException("ops");
+    return userRepository.findUserByLogin(login)
+        .orElseThrow(() -> new UserNotFoundException("Login não encontrado: " + login));
   }
 
   // TODO: A função `login` recebe o nome de usuário correspondente fo banco de
@@ -54,8 +65,7 @@ public class LoginService {
     if (user != null && checkPassword(password.trim(), user.getPassword(), user.getSalt())) {
       userRepository.changeUserOnlineState(user.getId(), true);
       return user.getId();
-    }
-    else return null;
+    } else return null;
   }
 
   /**
@@ -66,17 +76,17 @@ public class LoginService {
    */
   public Boolean logout(Long id) {
     User user = null;
-    User response = null;
 
     try {
       user = userRepository.findUserById(id);
-      response = userRepository.changeUserOnlineState(user.getId(), false);
     } catch (Exception e) {
       System.out.println(" --> Error: " + e.getMessage());
     }
     
-    if (response != null) return true;
-    else return false;
+    if (user != null) {
+      userRepository.changeUserOnlineState(user.getId(), false);
+      return true;
+    } else return false;
   }
 
   /**

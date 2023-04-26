@@ -44,16 +44,18 @@ public class PersonController {
   }
 
   @PostMapping("/save")
-  public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) throws Exception {
-    try {
-      var newPerson = personService.saveAccount(personDto);
-      return ResponseEntity.ok(personMapper.toDto(newPerson));
-      // if (newPerson != null) 
-      // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
-    } catch (UserAlreadyExistException e) {
-      System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
-      return ResponseEntity.badRequest().body(e.getMessage());
-    }
+  public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) throws UserAlreadyExistException {
+    
+    var newPerson = personService.saveAccount(personDto);
+    return ResponseEntity.ok(personMapper.toDto(newPerson));
+
+    // try {
+    //   // if (newPerson != null) 
+    //   // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");
+    // } catch (UserAlreadyExistException e) {
+    //   System.out.println(" -> Erro ao tentar salvar a conta: " + e.getMessage());
+    //   return ResponseEntity.badRequest().body(e.getMessage());
+    // }
   }
 
   @PutMapping("/update")
