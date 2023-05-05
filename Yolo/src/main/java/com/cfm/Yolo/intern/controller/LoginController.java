@@ -1,7 +1,5 @@
 package com.cfm.Yolo.intern.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.cfm.Yolo.intern.dto.ErrorDto;
 import com.cfm.Yolo.intern.dto.LoginDto;
 import com.cfm.Yolo.intern.dto.UserDto;
 import com.cfm.Yolo.intern.exception.UserNotFoundException;
