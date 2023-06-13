@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.exceptionHandler;
+package com.cfm.Yolo.intern.exceptionHandler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.cfm.Yolo.domain.dto.ErrorDto;
-import com.cfm.Yolo.domain.exception.InvalidPasswordException;
-import com.cfm.Yolo.domain.exception.PersonNotFoundException;
-import com.cfm.Yolo.domain.exception.UserAlreadyExistException;
-import com.cfm.Yolo.domain.exception.UserNotFoundException;
+import com.cfm.Yolo.intern.dto.ErrorDto;
+import com.cfm.Yolo.intern.exception.InvalidPasswordException;
+import com.cfm.Yolo.intern.exception.PersonNotFoundException;
+import com.cfm.Yolo.intern.exception.UserAlreadyExistException;
+import com.cfm.Yolo.intern.exception.UserNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {

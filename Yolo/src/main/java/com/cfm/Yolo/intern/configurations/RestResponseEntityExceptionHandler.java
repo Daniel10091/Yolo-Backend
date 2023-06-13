@@ -1,4 +1,4 @@
-// package com.cfm.Yolo.domain.configurations;
+// package com.cfm.Yolo.intern.configurations;
 
 // import org.springframework.http.HttpHeaders;
 // import org.springframework.http.HttpStatus;
@@ -8,7 +8,7 @@
 // import org.springframework.web.context.request.WebRequest;
 // import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-// import com.cfm.Yolo.domain.dto.ErrorDto;
+// import com.cfm.Yolo.intern.dto.ErrorDto;
 
 // @ControllerAdvice
 // public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

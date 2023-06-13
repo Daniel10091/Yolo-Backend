@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.model;
+package com.cfm.Yolo.intern.model;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;

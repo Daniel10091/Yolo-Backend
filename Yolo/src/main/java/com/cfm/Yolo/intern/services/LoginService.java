@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.services;
+package com.cfm.Yolo.intern.services;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -9,9 +9,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.domain.exception.UserNotFoundException;
-import com.cfm.Yolo.domain.model.User;
-import com.cfm.Yolo.domain.repository.UserRepository;
+import com.cfm.Yolo.intern.exception.UserNotFoundException;
+import com.cfm.Yolo.intern.model.User;
+import com.cfm.Yolo.intern.repository.UserRepository;
 
 @Service
 @Transactional

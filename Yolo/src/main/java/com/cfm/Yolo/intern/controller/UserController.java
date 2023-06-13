@@ -1,12 +1,12 @@
-package com.cfm.Yolo.domain.controller;
+package com.cfm.Yolo.intern.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cfm.Yolo.domain.mappers.PersonMapper;
-import com.cfm.Yolo.domain.model.Person;
-import com.cfm.Yolo.domain.services.PersonService;
+import com.cfm.Yolo.intern.mappers.PersonMapper;
+import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.intern.services.PersonService;
 
 @RestController
 @RequestMapping("/yolo/api/user")

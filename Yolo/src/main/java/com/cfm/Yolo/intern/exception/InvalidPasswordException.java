@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.exception;
+package com.cfm.Yolo.intern.exception;
 
 public class InvalidPasswordException extends RuntimeException {
   

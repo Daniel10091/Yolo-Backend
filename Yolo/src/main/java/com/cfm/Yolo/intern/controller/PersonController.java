@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.controller;
+package com.cfm.Yolo.intern.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.cfm.Yolo.domain.dto.ChangePasswordDto;
-import com.cfm.Yolo.domain.dto.PersonDto;
-import com.cfm.Yolo.domain.exception.UserAlreadyExistException;
-import com.cfm.Yolo.domain.exception.UserNotFoundException;
-import com.cfm.Yolo.domain.mappers.PersonMapper;
-import com.cfm.Yolo.domain.model.Person;
-import com.cfm.Yolo.domain.services.PersonService;
+import com.cfm.Yolo.intern.dto.ChangePasswordDto;
+import com.cfm.Yolo.intern.dto.PersonDto;
+import com.cfm.Yolo.intern.exception.UserAlreadyExistException;
+import com.cfm.Yolo.intern.exception.UserNotFoundException;
+import com.cfm.Yolo.intern.mappers.PersonMapper;
+import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.intern.services.PersonService;
 
 @RestController
 @RequestMapping("/yolo/api/person")

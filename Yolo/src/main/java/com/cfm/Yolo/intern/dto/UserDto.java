@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.dto;
+package com.cfm.Yolo.intern.dto;
 
 
 import java.time.LocalDate;

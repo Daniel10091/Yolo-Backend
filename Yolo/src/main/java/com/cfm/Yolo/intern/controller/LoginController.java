@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.controller;
+package com.cfm.Yolo.intern.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cfm.Yolo.domain.dto.LoginDto;
-import com.cfm.Yolo.domain.dto.UserDto;
-import com.cfm.Yolo.domain.exception.UserNotFoundException;
-import com.cfm.Yolo.domain.mappers.UserMapper;
-import com.cfm.Yolo.domain.model.User;
-import com.cfm.Yolo.domain.services.LoginService;
+import com.cfm.Yolo.intern.dto.LoginDto;
+import com.cfm.Yolo.intern.dto.UserDto;
+import com.cfm.Yolo.intern.exception.UserNotFoundException;
+import com.cfm.Yolo.intern.mappers.UserMapper;
+import com.cfm.Yolo.intern.model.User;
+import com.cfm.Yolo.intern.services.LoginService;
 
 @RestController
 @RequestMapping("/yolo/api/user")

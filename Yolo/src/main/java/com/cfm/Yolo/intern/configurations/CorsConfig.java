@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.configurations;
+package com.cfm.Yolo.intern.configurations;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

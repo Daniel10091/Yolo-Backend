@@ -1,4 +1,4 @@
-package com.cfm.Yolo.domain.controller;
+package com.cfm.Yolo.intern.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cfm.Yolo.domain.dto.EmailDto;
-import com.cfm.Yolo.domain.mappers.EmailMapper;
-import com.cfm.Yolo.domain.model.Email;
-import com.cfm.Yolo.domain.services.EmailService;
+import com.cfm.Yolo.intern.dto.EmailDto;
+import com.cfm.Yolo.intern.mappers.EmailMapper;
+import com.cfm.Yolo.intern.model.Email;
+import com.cfm.Yolo.intern.services.EmailService;
 
 @RestController
 @RequestMapping("/yolo/api/email")
