@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.services;
+package com.cfm.Yolo.domain.services;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -11,13 +11,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.intern.dto.PersonDto;
-import com.cfm.Yolo.intern.exception.InvalidPasswordException;
-import com.cfm.Yolo.intern.exception.UserAlreadyExistException;
-import com.cfm.Yolo.intern.exception.UserNotFoundException;
-import com.cfm.Yolo.intern.mappers.PersonMapper;
-import com.cfm.Yolo.intern.model.Person;
-import com.cfm.Yolo.intern.repository.PersonRepository;
+import com.cfm.Yolo.domain.dto.PersonDto;
+import com.cfm.Yolo.domain.exception.InvalidPasswordException;
+import com.cfm.Yolo.domain.exception.UserAlreadyExistException;
+import com.cfm.Yolo.domain.exception.UserNotFoundException;
+import com.cfm.Yolo.domain.mappers.PersonMapper;
+import com.cfm.Yolo.domain.model.Person;
+import com.cfm.Yolo.domain.repository.PersonRepository;
 
 @Service
 @Transactional

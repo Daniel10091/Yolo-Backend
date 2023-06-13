@@ -1,6 +1,6 @@
-package com.cfm.Yolo.intern.repository;
+package com.cfm.Yolo.domain.repository;
 
-import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.domain.model.Person;
 
 import java.util.Optional;
 

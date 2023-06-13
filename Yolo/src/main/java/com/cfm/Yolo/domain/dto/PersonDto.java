@@ -1,17 +1,17 @@
-package com.cfm.Yolo.intern.dto;
+package com.cfm.Yolo.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.domain.model.Person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * A DTO for the {@link com.cfm.Yolo.intern.model.Person} entity
+ * A DTO for the {@link com.cfm.Yolo.domain.model.Person} entity
  */
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.controller;
+package com.cfm.Yolo.domain.controller;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cfm.Yolo.intern.dto.UserDto;
-import com.cfm.Yolo.intern.services.FriendsService;
-import com.cfm.Yolo.intern.services.PersonService;
+import com.cfm.Yolo.domain.dto.UserDto;
+import com.cfm.Yolo.domain.services.FriendsService;
+import com.cfm.Yolo.domain.services.PersonService;
 
 @RestController
 @RequestMapping("/yolo/api/friends")

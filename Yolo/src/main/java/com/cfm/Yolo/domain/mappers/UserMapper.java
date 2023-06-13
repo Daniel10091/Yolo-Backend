@@ -1,11 +1,11 @@
-package com.cfm.Yolo.intern.mappers;
+package com.cfm.Yolo.domain.mappers;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import com.cfm.Yolo.intern.dto.UserDto;
-import com.cfm.Yolo.intern.model.User;
+import com.cfm.Yolo.domain.dto.UserDto;
+import com.cfm.Yolo.domain.model.User;
 
 @Mapper
 public interface UserMapper {

@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.model;
+package com.cfm.Yolo.domain.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

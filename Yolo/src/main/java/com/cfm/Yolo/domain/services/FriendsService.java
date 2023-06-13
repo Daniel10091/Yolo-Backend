@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.services;
+package com.cfm.Yolo.domain.services;
 
 import javax.transaction.Transactional;
 

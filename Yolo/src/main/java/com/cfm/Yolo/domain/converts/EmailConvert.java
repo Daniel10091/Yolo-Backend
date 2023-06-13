@@ -1,10 +1,10 @@
-package com.cfm.Yolo.intern.converts;
+package com.cfm.Yolo.domain.converts;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.cfm.Yolo.intern.dto.EmailDto;
-import com.cfm.Yolo.intern.model.Email;
+import com.cfm.Yolo.domain.dto.EmailDto;
+import com.cfm.Yolo.domain.model.Email;
 
 public class EmailConvert {
 

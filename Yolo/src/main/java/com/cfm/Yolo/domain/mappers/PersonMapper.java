@@ -1,7 +1,7 @@
-package com.cfm.Yolo.intern.mappers;
+package com.cfm.Yolo.domain.mappers;
 
-import com.cfm.Yolo.intern.dto.PersonDto;
-import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.domain.dto.PersonDto;
+import com.cfm.Yolo.domain.model.Person;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

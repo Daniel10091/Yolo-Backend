@@ -1,7 +1,7 @@
-package com.cfm.Yolo.intern.converts;
+package com.cfm.Yolo.domain.converts;
 
-import com.cfm.Yolo.intern.dto.PersonDto;
-import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.domain.dto.PersonDto;
+import com.cfm.Yolo.domain.model.Person;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.exception;
+package com.cfm.Yolo.domain.exception;
 
 public class PersonNotFoundException extends RuntimeException {
 

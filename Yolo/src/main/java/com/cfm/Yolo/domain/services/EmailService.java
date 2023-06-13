@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.services;
+package com.cfm.Yolo.domain.services;
 
 import java.util.List;
 
@@ -6,11 +6,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.intern.dto.EmailDto;
-import com.cfm.Yolo.intern.model.Email;
-import com.cfm.Yolo.intern.model.Person;
-import com.cfm.Yolo.intern.repository.EmailRepository;
-import com.cfm.Yolo.intern.repository.PersonRepository;
+import com.cfm.Yolo.domain.dto.EmailDto;
+import com.cfm.Yolo.domain.model.Email;
+import com.cfm.Yolo.domain.model.Person;
+import com.cfm.Yolo.domain.repository.EmailRepository;
+import com.cfm.Yolo.domain.repository.PersonRepository;
 
 @Service
 @Transactional

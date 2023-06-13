@@ -1,9 +1,9 @@
-package com.cfm.Yolo.intern.dto;
+package com.cfm.Yolo.domain.dto;
 
 import java.time.LocalDate;
 
-import com.cfm.Yolo.intern.model.Email;
-import com.cfm.Yolo.intern.model.Person;
+import com.cfm.Yolo.domain.model.Email;
+import com.cfm.Yolo.domain.model.Person;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.dto;
+package com.cfm.Yolo.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

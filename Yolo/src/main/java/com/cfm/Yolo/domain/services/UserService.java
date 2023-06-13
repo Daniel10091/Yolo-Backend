@@ -1,13 +1,13 @@
-package com.cfm.Yolo.intern.services;
+package com.cfm.Yolo.domain.services;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.cfm.Yolo.intern.dto.UserDto;
-import com.cfm.Yolo.intern.mappers.UserMapper;
-import com.cfm.Yolo.intern.model.User;
-import com.cfm.Yolo.intern.repository.UserRepository;
+import com.cfm.Yolo.domain.dto.UserDto;
+import com.cfm.Yolo.domain.mappers.UserMapper;
+import com.cfm.Yolo.domain.model.User;
+import com.cfm.Yolo.domain.repository.UserRepository;
 
 @Service
 @Transactional

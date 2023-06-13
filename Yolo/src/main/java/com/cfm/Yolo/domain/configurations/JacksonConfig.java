@@ -1,4 +1,4 @@
-package com.cfm.Yolo.intern.configurations;
+package com.cfm.Yolo.domain.configurations;
 
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
