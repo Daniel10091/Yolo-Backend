@@ -1,6 +1,8 @@
 package com.cfm.Yolo.intern.controller;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -46,8 +48,9 @@ public class PersonController {
   @PostMapping("/save")
   public ResponseEntity<?> saveAccount(@RequestBody PersonDto personDto) throws UserAlreadyExistException {
     
-    var newPerson = personService.saveAccount(personDto);
-    return ResponseEntity.ok(personMapper.toDto(newPerson));
+    // var newPerson = personService.saveAccount(personDto);
+    // return ResponseEntity.ok(personMapper.toDto(newPerson));
+    return null;
 
     // try {
     //   // if (newPerson != null) 
@@ -59,9 +62,20 @@ public class PersonController {
   }
 
   @PutMapping("/update")
-  public ResponseEntity<?> updateAccount(@RequestBody PersonDto personDto) throws Exception {
+  public ResponseEntity<?> updateAccount(@RequestBody Map<String, Object> personDto) throws Exception {
     try {
-      var newPerson = personService.saveAccount(personDto);
+      var updatePerson = personService.findPersonById(Long.parseLong(personDto.get("id").toString()));
+
+      Class<Person> personClass = Person.class;
+      var fields = personClass.getDeclaredFields();
+
+      for (Field field : fields) {
+        if (personDto.containsKey(field.getName())) {
+          updatePerson.getClass().getDeclaredField(field.getName()).set(updatePerson, personDto.get(field.getName()));
+        }
+      }
+
+      var newPerson = personService.saveAccount(updatePerson);
       return ResponseEntity.ok(personMapper.toDto(newPerson));
       // if (newPerson != null) 
       // else return ResponseEntity.badRequest().body("Não foi possível salvar o usuário!");

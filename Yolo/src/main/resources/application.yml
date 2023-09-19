@@ -11,4 +11,4 @@ spring:
     open-in-view: false
 
 server:
-  port: 8084
+  port: 8086

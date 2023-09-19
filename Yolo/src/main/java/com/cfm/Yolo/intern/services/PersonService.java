@@ -58,44 +58,50 @@ public class PersonService {
    * @return
    * @throws Exception
    */
-  public Person saveAccount(PersonDto personDto) {
+  public Person saveAccount(Person person) {
     Person saveReturn = null;
-    Person person = null;
-
-    if (personDto.getCode() != null) {
-      person = personRepository.findById(personDto.getCode()).get();
-      if (person != null) {
-        person.setName(personDto.getName().trim());
-        person.setBirthday(personDto.getBirthday());
-        person.setGender(personDto.getGender());
-        person.getUser().setAvatar(personDto.getAvatar());
-        person.getUser().setBackground(personDto.getBackground());
-        person.getUser().setUsername(personDto.getUsername().trim());
-        // person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
-        // person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
-      } else 
-        throw new UserNotFoundException(
-            "O usuário com o id " + personDto.getCode() + " não foi encontrado");
-    } else {
-
-      var findUserByUsername = personRepository.findPersonByUserUsername(personDto.getUsername());
-
-      if (findUserByUsername == null) {
-        person = personMapper.toEntity(personDto);
-        
-        byte[] salt = generateSalt();
-
-        person.getUser().setPassword(encryptPassword(personDto.getPassword().trim(), salt));
-        person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
-
-        person.getUser().setPerson(person);
-      } else 
-        throw new UserAlreadyExistException(
-            "O nome de usuário '" + personDto.getUsername() + "' já existe");
-    }
+    
     saveReturn = personRepository.save(person);
     return saveReturn != null ? saveReturn : null;
   }
+  // public Person saveAccount(PersonDto personDto) {
+  //   Person saveReturn = null;
+  //   Person person = null;
+
+  //   if (personDto.getCode() != null) {
+  //     person = personRepository.findById(personDto.getCode()).get();
+  //     if (person != null) {
+  //       person.setName(personDto.getName().trim());
+  //       person.setBirthday(personDto.getBirthday());
+  //       person.setGender(personDto.getGender());
+  //       person.getUser().setAvatar(personDto.getAvatar());
+  //       person.getUser().setBackground(personDto.getBackground());
+  //       person.getUser().setUsername(personDto.getUsername().trim());
+  //       // person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+  //       // person.getUser().setPassword(encryptPassword(personDto.getPassword(), salt));
+  //     } else 
+  //       throw new UserNotFoundException(
+  //           "O usuário com o id " + personDto.getCode() + " não foi encontrado");
+  //   } else {
+
+  //     var findUserByUsername = personRepository.findPersonByUserUsername(personDto.getUsername());
+
+  //     if (findUserByUsername == null) {
+  //       person = personMapper.toEntity(personDto);
+        
+  //       byte[] salt = generateSalt();
+
+  //       person.getUser().setPassword(encryptPassword(personDto.getPassword().trim(), salt));
+  //       person.getUser().setSalt(Base64.getEncoder().encodeToString(salt));
+
+  //       person.getUser().setPerson(person);
+  //     } else 
+  //       throw new UserAlreadyExistException(
+  //           "O nome de usuário '" + personDto.getUsername() + "' já existe");
+  //   }
+  //   saveReturn = personRepository.save(person);
+  //   return saveReturn != null ? saveReturn : null;
+  // }
 
   /**
    * Change the password of the user
